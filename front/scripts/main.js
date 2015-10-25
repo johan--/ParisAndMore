@@ -14,7 +14,7 @@ require('ionic-angular');
 require('angular-material');
 var app = angular.module(namespace, ['ionic', 'ngMaterial',
     // inject:modules start
-    require('./common')(namespace).name
+    require('./venues')(namespace).name
     // inject:modules end
 ]);
 

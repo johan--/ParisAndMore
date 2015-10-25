@@ -2,6 +2,7 @@
 
 module.exports = function(app) {
     // inject:start
-    require('./hello.controller')(app);
+    require('./venues-factory.service')(app);
+    require('./venues.service')(app);
     // inject:end
 };

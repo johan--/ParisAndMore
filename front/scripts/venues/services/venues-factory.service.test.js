@@ -3,7 +3,7 @@
 var angular = require('angular');
 require('angular-mocks');
 var app = require('../')('app');
-var servicename = 'monservice';
+var servicename = 'venuesFactory';
 describe(app.name, function() {
 
     describe('Services', function() {

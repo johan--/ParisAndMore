@@ -1,13 +1,12 @@
 'use strict';
-var servicename = 'monservice';
+var servicename = 'venuesFactory';
 
 module.exports = function(app) {
 
-    var dependencies = ['$resource'];
+    var dependencies = [];
 
-    function service($resource) {
+    function service() {
         var add = function(a, b) {
-            console.log($resource);
             return a + b;
         };
 

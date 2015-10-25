@@ -1,18 +1,15 @@
 'use strict';
-var controllername = 'hello';
+var controllername = 'themes';
 
 module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
-    console.log(app.name);
     /*jshint validthis: true */
 
-    var deps = [app.name + '.monservice'];
+    var deps = [];
 
-    function controller(monservice) {
+    function controller() {
         var vm = this;
         vm.controllername = fullname;
-        vm.testservice = monservice.add(5, 6);
-        console.log(monservice.add(5, 6));
 
         var activate = function() {
 

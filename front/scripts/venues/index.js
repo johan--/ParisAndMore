@@ -1,7 +1,6 @@
 'use strict';
 var angular = require('angular');
 require('angular-ui-router');
-require('angular-resource');
 require('angular-sanitize');
 require('angular-animate');
 require('ionic');
@@ -10,13 +9,13 @@ require('angular-material');
 require('famous-angular');
 require('ng-cordova');
 
-var modulename = 'common';
+var modulename = 'venues';
 
 module.exports = function(namespace) {
 
     var fullname = namespace + '.' + modulename;
 
-    var app = angular.module(fullname, ['ui.router', 'ionic', 'famous.angular', 'ngCordova', 'ngMaterial', 'ngResource']);
+    var app = angular.module(fullname, ['ui.router', 'ionic', 'famous.angular', 'ngCordova', 'ngMaterial']);
     // inject:folders start
     require('./controllers')(app);
     require('./services')(app);
@@ -28,8 +27,7 @@ module.exports = function(namespace) {
         $urlRouterProvider.otherwise('/');
         $stateProvider.state('home', {
             url: '/',
-            template: require('./views/home.html'),
-            controller: fullname + '.hello as hello'
+            template: require('./views/home.html')
         });
     };
     configRoutes.$inject = configRoutesDeps;

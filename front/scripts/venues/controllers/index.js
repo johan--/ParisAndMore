@@ -2,6 +2,6 @@
 
 module.exports = function(app) {
     // inject:start
-    require('./monservice.service')(app);
+    require('./themes.controller')(app);
     // inject:end
 };
