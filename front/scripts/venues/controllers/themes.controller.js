@@ -4,17 +4,24 @@ var controllername = 'themes';
 module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
+    var deps = [app.name + '.VenuesService'];
 
-    var deps = [];
-
-    function controller() {
+    function controller(VenuesService) {
         var vm = this;
-        vm.controllername = fullname;
 
-        var activate = function() {
+        vm.getThemes = getThemes;
 
-        };
         activate();
+
+        function activate() {
+            vm.getThemes();
+        }
+
+        function getThemes() {
+            vm.themes = VenuesService.getThemes();
+            console.log(vm.themes);
+        }
+
     }
 
     controller.$inject = deps;
