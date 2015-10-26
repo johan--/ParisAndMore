@@ -26,11 +26,20 @@ module.exports = function(namespace) {
     var configRoutesDeps = ['$stateProvider', '$urlRouterProvider'];
     var configRoutes = function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
-        $stateProvider.state('home', {
-            url: '/',
-            template: require('./views/home.html'),
-            controller: fullname + '.themes as themesCtrl'
-        });
+
+        $stateProvider
+            .state('home', {
+                url: '/',
+                template: require('./views/home.html'),
+                controller: fullname + '.themes as themesCtrl'
+            })
+            .state('venues', {
+                url: '/venues',
+                template: require('./views/venues.html'),
+                controller: fullname + '.venues as venuesCtrl',
+                //params: {urlParams: null}
+            });
+
     };
     configRoutes.$inject = configRoutesDeps;
     app.config(configRoutes);

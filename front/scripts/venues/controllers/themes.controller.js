@@ -4,12 +4,14 @@ var controllername = 'themes';
 module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
-    var deps = [app.name + '.VenuesService'];
+    var deps = [app.name + '.VenuesService', '$state'];
 
-    function controller(VenuesService) {
+    function controller(VenuesService, $state) {
+        //$state.go('venues', {urlParams: {some: 'thing'}});
         var vm = this;
 
         vm.getThemes = getThemes;
+        vm.setVenuesCats = setVenuesCats;
 
         activate();
 
@@ -17,9 +19,12 @@ module.exports = function(app) {
             vm.getThemes();
         }
 
+        function setVenuesCats(categories) {
+            VenuesService.setVenuesCats(categories.theme.categories);
+        }
+
         function getThemes() {
             vm.themes = VenuesService.getThemes();
-            console.log(vm.themes);
         }
 
     }

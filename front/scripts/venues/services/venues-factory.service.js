@@ -16,7 +16,8 @@ module.exports = function(app) {
         return $resource(Foursquare.BASE_URL, args, {
             getVenues: {
                 method: 'GET',
-                url: Foursquare.BASE_URL + '/venues/search'
+                url: Foursquare.BASE_URL + '/venues/search?categoryId=:categoryId',
+                params: {categoryId: '@categoryId'}
             }
         });
     }
