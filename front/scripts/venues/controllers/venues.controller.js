@@ -22,7 +22,6 @@ module.exports = function(app) {
 
         function getVenues() {
             var categories = VenuesService.getVenuesCats();
-            console.log(categories);
 
             VenuesService.getVenues({
                 categoryId: categories
@@ -32,7 +31,6 @@ module.exports = function(app) {
         }
 
         function setVenue(venue) {
-            console.log(venue);
             VenuesService.setVenue(venue.id);
         }
 

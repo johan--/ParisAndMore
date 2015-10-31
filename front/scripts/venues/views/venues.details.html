@@ -1,1 +1,29 @@
-<h1>Venue Detail</h1>
+<ion-view view-title="{{ venueCtrl.venue.name }}" cache-view="false">
+    <ion-tabs class="tabs-positive tabs-icon-only">
+        <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+            <ion-content>
+                <img ng-src="https://irs0.4sqi.net/img/general/300x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
+                <h1>{{ venueCtrl.venue.name }}</h1>
+                <span style="background-color:#{{ venueCtrl.venue.ratingColor }}">Note: {{ venueCtrl.venue.rating }}</span>
+                <p>{{ venueCtrl.venue.description }}</p>
+                <md-button class="md-raised md-primary">En savoir plus</md-button>
+            </ion-content>
+        </ion-tab>
+        <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+            <img ng-src="https://irs0.4sqi.net/img/general/300x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
+            <h1>{{ venueCtrl.venue.name }}</h1>
+            <span>Ouverture: {{ venueCtrl.venue.popular.isOpen }}</span>
+            <p>Ouvert le:</p>
+            <ul>
+                <li ng-repeat="time in venueCtrl.venue.popular.timeframes">
+                    {{ time.days }}
+                </li>
+            </ul>
+        </ion-tab>
+        <ion-tab title="Settings" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
+        <!-- Tab 3 content -->
+        </ion-tab>
+    </ion-tabs>
+</ion-view>
+
+

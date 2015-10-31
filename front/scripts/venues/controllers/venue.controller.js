@@ -5,22 +5,30 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = [];
+    var deps = [app.name + '.VenuesService', '$stateParams'];
 
-    function controller() {
+    function controller(VenuesService, $stateParams) {
         var vm = this;
+        console.log($stateParams);
+        var venueId = $stateParams.venueId;
         vm.controllername = fullname;
-        console.log(vm.controllername);
+        vm.getVenue = getVenue;
 
         activate();
 
         function activate() {
-
+            vm.getVenue();
         }
 
         function getVenue() {
-
+            VenuesService.getVenue({
+                venueId: venueId
+            }).then(function(result) {
+                console.log(result);
+                vm.venue = result.response.venue;
+            });
         }
+
     }
 
     controller.$inject = deps;

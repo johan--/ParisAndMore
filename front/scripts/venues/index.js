@@ -19,12 +19,14 @@ module.exports = function(namespace) {
     var app = angular.module(fullname, ['ui.router', 'ionic', 'famous.angular', 'ngCordova', 'ngMaterial', 'ngResource']);
     // inject:folders start
     require('./controllers')(app);
-require('./services')(app);
+    require('./services')(app);
     // inject:folders end
     app.namespace = app.namespace || {};
 
-    var configRoutesDeps = ['$stateProvider', '$urlRouterProvider'];
-    var configRoutes = function($stateProvider, $urlRouterProvider) {
+    var configRoutesDeps = ['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider'];
+    var configRoutes = function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+        $ionicConfigProvider.tabs.position('bottom');
+
         $urlRouterProvider.otherwise('/');
 
         $stateProvider

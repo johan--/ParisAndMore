@@ -15,9 +15,9 @@ module.exports = function(app) {
         Service.prototype = {
             getThemes: getThemes,
             getVenues: getVenues,
+            getVenue: getVenue,
             setVenuesCats: setVenuesCats,
-            getVenuesCats: getVenuesCats,
-            setVenue: setVenue
+            getVenuesCats: getVenuesCats
         };
 
         return new Service();
@@ -61,9 +61,6 @@ module.exports = function(app) {
             return venuesCategories;
         }
 
-        function setVenue(id) {
-            venueId = id;
-        }
     }
 
     service.$inject = dependencies;
