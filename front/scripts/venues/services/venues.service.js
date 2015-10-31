@@ -8,6 +8,7 @@ module.exports = function(app) {
     function service(VenuesFactory) {
 
         var venuesCategories = '';
+        var venueId = '';
 
         function Service() {}
 
@@ -15,7 +16,8 @@ module.exports = function(app) {
             getThemes: getThemes,
             getVenues: getVenues,
             setVenuesCats: setVenuesCats,
-            getVenuesCats: getVenuesCats
+            getVenuesCats: getVenuesCats,
+            setVenue: setVenue
         };
 
         return new Service();
@@ -47,12 +49,20 @@ module.exports = function(app) {
             return VenuesFactory.getVenues(params).$promise;
         }
 
+        function getVenue(params) {
+            return VenuesFactory.getVenue(params).$promise;
+        }
+
         function setVenuesCats(cats) {
             venuesCategories = cats;
         }
 
         function getVenuesCats() {
             return venuesCategories;
+        }
+
+        function setVenue(id) {
+            venueId = id;
         }
     }
 

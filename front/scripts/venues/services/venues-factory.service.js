@@ -18,6 +18,11 @@ module.exports = function(app) {
                 method: 'GET',
                 url: Foursquare.BASE_URL + '/venues/search?categoryId=:categoryId',
                 params: {categoryId: '@categoryId'}
+            },
+            getVenue: {
+                method: 'GET',
+                url: Foursquare.BASE_URL + '/venues/search?categoryId=:categoryId',
+                params: {venueId: '@venueId'}
             }
         });
     }

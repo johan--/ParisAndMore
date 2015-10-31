@@ -12,6 +12,7 @@ module.exports = function(app) {
         vm.controllername = fullname;
 
         vm.getVenues = getVenues;
+        vm.setVenue = setVenue;
 
         activate();
 
@@ -28,6 +29,11 @@ module.exports = function(app) {
             }).then(function(result) {
                 vm.venues = result.response.venues;
             });
+        }
+
+        function setVenue(venue) {
+            console.log(venue);
+            VenuesService.setVenue(venue.id);
         }
 
     }

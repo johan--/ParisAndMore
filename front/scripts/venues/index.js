@@ -19,7 +19,7 @@ module.exports = function(namespace) {
     var app = angular.module(fullname, ['ui.router', 'ionic', 'famous.angular', 'ngCordova', 'ngMaterial', 'ngResource']);
     // inject:folders start
     require('./controllers')(app);
-    require('./services')(app);
+require('./services')(app);
     // inject:folders end
     app.namespace = app.namespace || {};
 
@@ -38,6 +38,11 @@ module.exports = function(namespace) {
                 template: require('./views/venues.html'),
                 controller: fullname + '.venues as venuesCtrl',
                 //params: {urlParams: null}
+            })
+            .state('venue', {
+                url: '/venues/:venueId',
+                template: require('./views/venues.details.html'),
+                controller: fullname + '.venue as venueCtrl'
             });
 
     };
