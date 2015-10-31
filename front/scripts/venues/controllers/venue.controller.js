@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = [app.name + '.VenuesService', '$stateParams'];
+    var deps = [app.name + '.VenuesService', '$stateParams', '$ionicLoading'];
 
-    function controller(VenuesService, $stateParams) {
+    function controller(VenuesService, $stateParams, $ionicLoading) {
         var vm = this;
         console.log($stateParams);
         var venueId = $stateParams.venueId;
@@ -17,6 +17,9 @@ module.exports = function(app) {
         activate();
 
         function activate() {
+            $ionicLoading.show({
+                template: 'loading'
+            });
             vm.getVenue();
         }
 
@@ -26,6 +29,7 @@ module.exports = function(app) {
             }).then(function(result) {
                 console.log(result);
                 vm.venue = result.response.venue;
+                $ionicLoading.hide();
             });
         }
 
