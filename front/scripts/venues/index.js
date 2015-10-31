@@ -25,27 +25,6 @@ module.exports = function(namespace) {
 
     var configRoutesDeps = ['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider'];
     var configRoutes = function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-        $ionicConfigProvider.tabs.position('bottom');
-
-        $urlRouterProvider.otherwise('/');
-
-        $stateProvider
-            .state('home', {
-                url: '/',
-                template: require('./views/home.html'),
-                controller: fullname + '.themes as themesCtrl'
-            })
-            .state('venues', {
-                url: '/venues',
-                template: require('./views/venues.html'),
-                controller: fullname + '.venues as venuesCtrl',
-                //params: {urlParams: null}
-            })
-            .state('venue', {
-                url: '/venues/:venueId',
-                template: require('./views/venues.details.html'),
-                controller: fullname + '.venue as venueCtrl'
-            });
 
     };
     configRoutes.$inject = configRoutesDeps;

@@ -28,8 +28,8 @@ if (process.env.SENTRY_MODE === 'prod') {
     app.config(configCompile);
 }
 
-var runDeps = ['$ionicPlatform', '$window'];
-var run = function($ionicPlatform, $window) {
+run.$inject = ['$ionicPlatform', '$window'];
+function run($ionicPlatform, $window) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -43,9 +43,50 @@ var run = function($ionicPlatform, $window) {
             $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
         }
     });
-};
+}
 
-run.$inject = runDeps;
+config.$inject = ['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider'];
+function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    $ionicConfigProvider.tabs.position('bottom');
+
+    $urlRouterProvider.otherwise('/app/home');
+
+    $stateProvider
+        .state('app', {
+            url: '/app',
+            abstract: true,
+            template: require('./common/views/menu.html')
+        })
+        .state('app.home', {
+            url: '/home',
+            views: {
+                'menuContent': {
+                    template: require('./venues/views/home.html'),
+                    controller: 'main.venues.themes as themesCtrl'
+                }
+            }
+        })
+        .state('app.venues', {
+            url: '/venues',
+            views: {
+                'menuContent': {
+                    template: require('./venues/views/venues.html'),
+                    controller: 'main.venues.venues as venuesCtrl'
+                }
+            }
+        })
+        .state('app.venue', {
+            url: '/venues/:venueId',
+            views: {
+                'menuContent': {
+                    template: require('./venues/views/venues.details.html'),
+                    controller: 'main.venues.venue as venueCtrl'
+                }
+            }
+        });
+}
+
 app.run(run);
+app.config(config);
 
 module.exports = app;

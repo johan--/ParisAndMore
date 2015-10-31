@@ -21,5 +21,14 @@ module.exports = function(namespace) {
     // inject:folders end
     app.namespace = app.namespace || {};
 
+    var configRoutesDeps = ['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider'];
+    var configRoutes = function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+
+
+    };
+    configRoutes.$inject = configRoutesDeps;
+    app.config(configRoutes);
+
     return app;
 };

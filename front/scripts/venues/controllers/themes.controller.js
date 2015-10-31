@@ -7,8 +7,8 @@ module.exports = function(app) {
     var deps = [app.name + '.VenuesService', '$state'];
 
     function controller(VenuesService, $state) {
-        //$state.go('venues', {urlParams: {some: 'thing'}});
         var vm = this;
+        console.log(fullname);
 
         vm.getThemes = getThemes;
         vm.setVenuesCats = setVenuesCats;
