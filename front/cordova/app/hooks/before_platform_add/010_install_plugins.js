@@ -25,7 +25,8 @@ var pluginlist = [
     'cordova-plugin-whitelist',
     'ionic-plugin-keyboard',
     'https://github.com/testfairy/testfairy-cordova-plugin',
-    'https://github.com/driftyco/ionic-plugins-deploy'
+    'https://github.com/driftyco/ionic-plugins-deploy',
+    'https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin'
 ];
 
 // no need to configure below

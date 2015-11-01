@@ -9,11 +9,13 @@ var angular = require('angular');
 require('angular-ui-router');
 require('angular-animate');
 require('angular-sanitize');
+require('angular-material-icons');
+require('firebase');
 require('angularfire');
 require('ionic');
 require('ionic-angular');
 require('angular-material');
-var app = angular.module(namespace, ['ionic', 'ngMaterial', 'firebase',
+var app = angular.module(namespace, ['ionic', 'ngMaterial', 'firebase', 'ngMdIcons',
     // inject:modules start
     require('./common')(namespace).name,
     require('./login')(namespace).name,
@@ -30,8 +32,9 @@ if (process.env.SENTRY_MODE === 'prod') {
     app.config(configCompile);
 }
 
-run.$inject = ['$ionicPlatform', '$window'];
+run.$inject = ['$ionicPlatform', '$rootScope', '$window'];
 function run($ionicPlatform, $window) {
+
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -65,6 +68,24 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
                 'menuContent': {
                     template: require('./common/views/home.html'),
                     controller: 'main.common.home as homeCtrl'
+                }
+            }
+        })
+        .state('app.signup', {
+            url: '/signup',
+            views: {
+                'menuContent': {
+                    template: require('./login/views/signup.html'),
+                    controller: 'main.login.signup as signupCtrl'
+                }
+            }
+        })
+        .state('app.profile', {
+            url: '/profile',
+            views: {
+                'menuContent': {
+                    template: require('./login/views/profile.html'),
+                    controller: 'main.login.profile as profileCtrl'
                 }
             }
         })
