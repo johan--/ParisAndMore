@@ -18,6 +18,7 @@ module.exports = function(namespace) {
     var app = angular.module(fullname, ['ui.router', 'ionic', 'famous.angular', 'ngCordova', 'ngMaterial']);
     // inject:folders start
     require('./constants')(app);
+require('./controllers')(app);
     // inject:folders end
     app.namespace = app.namespace || {};
 

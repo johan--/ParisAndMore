@@ -7,7 +7,7 @@
                     <h1>{{ venueCtrl.venue.name }}</h1>
                     <span style="background-color:#{{ venueCtrl.venue.ratingColor }}">Note: {{ venueCtrl.venue.rating }}</span>
                     <p>{{ venueCtrl.venue.description }}</p>
-                    <md-button class="md-raised md-primary">En savoir plus</md-button>
+                    <md-button class="md-raised md-primary" ng-click="venueCtrl.takePicture()">En savoir plus</md-button>
                 </ion-content>
             </ion-view>
         </ion-tab>

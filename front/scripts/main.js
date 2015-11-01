@@ -9,10 +9,11 @@ var angular = require('angular');
 require('angular-ui-router');
 require('angular-animate');
 require('angular-sanitize');
+require('angularfire');
 require('ionic');
 require('ionic-angular');
 require('angular-material');
-var app = angular.module(namespace, ['ionic', 'ngMaterial',
+var app = angular.module(namespace, ['ionic', 'ngMaterial', 'firebase',
     // inject:modules start
     require('./common')(namespace).name,
     require('./venues')(namespace).name
@@ -49,7 +50,7 @@ config.$inject = ['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider'
 function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('bottom');
 
-    $urlRouterProvider.otherwise('/app/home');
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
         .state('app', {
@@ -58,10 +59,19 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
             template: require('./common/views/menu.html')
         })
         .state('app.home', {
-            url: '/home',
+            url: '/',
             views: {
                 'menuContent': {
-                    template: require('./venues/views/home.html'),
+                    template: require('./common/views/home.html'),
+                    controller: 'main.common.home as homecommCtrl'
+                }
+            }
+        })
+        .state('app.themes', {
+            url: '/themes',
+            views: {
+                'menuContent': {
+                    template: require('./venues/views/themes.html'),
                     controller: 'main.venues.themes as themesCtrl'
                 }
             }
