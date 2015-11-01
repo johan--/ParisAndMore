@@ -16,6 +16,7 @@ require('angular-material');
 var app = angular.module(namespace, ['ionic', 'ngMaterial', 'firebase',
     // inject:modules start
     require('./common')(namespace).name,
+    require('./login')(namespace).name,
     require('./venues')(namespace).name
     // inject:modules end
 ]);
@@ -63,7 +64,7 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
             views: {
                 'menuContent': {
                     template: require('./common/views/home.html'),
-                    controller: 'main.common.home as homecommCtrl'
+                    controller: 'main.common.home as homeCtrl'
                 }
             }
         })
