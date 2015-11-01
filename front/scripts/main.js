@@ -51,7 +51,7 @@ config.$inject = ['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider'
 function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('bottom');
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/app/home');
 
     $stateProvider
         .state('app', {
@@ -60,7 +60,7 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
             template: require('./common/views/menu.html')
         })
         .state('app.home', {
-            url: '/',
+            url: '/home',
             views: {
                 'menuContent': {
                     template: require('./common/views/home.html'),
