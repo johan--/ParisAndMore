@@ -13,7 +13,8 @@ module.exports = function(app) {
 
         Service.prototype = {
             createUser: createUser,
-            login: login
+            login: login,
+            getError: getError
         };
 
         return new Service();
@@ -49,15 +50,37 @@ module.exports = function(app) {
         }
 
         function login(user) {
-            $rootScope.authObj.$authWithPassword({
+            $ionicLoading.show({
+                template: 'Vérification...'
+            });
+            return $rootScope.authObj.$authWithPassword({
                 email: user.email,
                 password: user.password
             }).then(function(authData) {
-                console.log('identifié');
-                $state.go('app.profile');
-            }).catch(function(error) {
-                console.log(error);
+                $ionicLoading.hide();
             });
+        }
+
+        function getError(error) {
+            switch (error.code) {
+                case 'INVALID_EMAIL':
+                    console.error('Adresse email invalide');
+                    $ionicLoading.hide();
+                    $cordovaToast.showShortTop('Adresse email invalide');
+                break;
+                case 'INVALID_PASSWORD':
+                    console.error('Password invalide');
+                    $ionicLoading.hide();
+                    $cordovaToast.showShortTop('Password invalide');
+                break;
+                case 'INVALID_USER':
+                    console.error('Ce compte utilisateur n\' existe pas.');
+                    $ionicLoading.hide();
+                    $cordovaToast.showShortTop('Ce compte utilisateur n\' existe pas.');
+                break;
+                default:
+                    console.log('Error logging user in:', error);
+            }
         }
 
     }

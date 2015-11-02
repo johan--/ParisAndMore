@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['main.login.UsersService', '$rootScope', '$scope', '$ionicModal', 'Firebase', '$firebaseArray', 'main.common.firebaseConst', '$firebaseAuth'];
+    var deps = ['$scope', 'main.login.UsersService', '$ionicModal', '$state'];
 
-    function controller(UsersService, $rootScope, $scope, $ionicModal, Firebase, $firebaseArray, firebaseConst, $firebaseAuth) {
+    function controller($scope, UsersService, $ionicModal, $state) {
         var vm = this;
         vm.controllername = fullname;
         vm.modal = $ionicModal.fromTemplate(require('../../login/views/login.html'), {scope: $scope});
@@ -30,7 +30,12 @@ module.exports = function(app) {
         }
 
         function doLogin(user) {
-            UsersService.login(user);
+            UsersService.login(user).then(function() {
+                vm.modal.hide();
+                $state.go('app.profile');
+            }, function(error) {
+                UsersService.getError(error);
+            });
         }
 
     }
