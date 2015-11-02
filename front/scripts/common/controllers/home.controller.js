@@ -5,9 +5,10 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', 'main.login.RegistrationService', '$ionicModal', '$state'];
+    var deps = ['$rootScope', '$scope', 'main.login.RegistrationService', '$ionicModal', '$state'];
 
-    function controller($scope, RegistrationService, $ionicModal, $state) {
+    function controller($rootScope, $scope, RegistrationService, $ionicModal, $state) {
+        console.log($rootScope);
         var vm = this;
         vm.controllername = fullname;
         vm.modal = $ionicModal.fromTemplate(require('../../login/views/login.html'), {scope: $scope});

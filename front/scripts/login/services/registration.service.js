@@ -35,17 +35,10 @@ module.exports = function(app) {
                         users.set(user);
                         $ionicLoading.hide();
                         $state.go('app.profile');
-                    }).catch(function(error) {
-                        console.log(error);
                     });
                 }, function(error) {
                     $ionicLoading.hide();
-                    console.error(error);
-                    $cordovaToast.showShortTop(error).then(function(success) {
-                        // success
-                    }, function(error) {
-                        // error
-                    });
+                    getError(error);
                 });
         }
 
@@ -77,6 +70,11 @@ module.exports = function(app) {
                     console.error('Ce compte utilisateur n\' existe pas.');
                     $ionicLoading.hide();
                     $cordovaToast.showShortTop('Ce compte utilisateur n\' existe pas.');
+                break;
+                case 'EMAIL_TAKEN':
+                    console.error('Cette adresse email est déjà prise.');
+                    $ionicLoading.hide();
+                    $cordovaToast.showShortTop('Cette adresse email est déjà prise.');
                 break;
                 default:
                     console.log('Error logging user in:', error);
