@@ -1,12 +1,12 @@
 <ion-popover-view>
   <ion-content>
     <ion-list>
-      <a class="item" href="#">
+      <ion-item ui-sref="app.profile" ng-click="closePopover()">
         Profil
-      </a>
-      <a class="item" href="#">
+      </ion-item>
+      <ion-item ng-click="logOut(); closePopover()">
         Déconnexion
-      </a>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-popover-view>

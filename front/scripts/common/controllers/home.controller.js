@@ -33,11 +33,14 @@ module.exports = function(app) {
         function doLogin(user) {
             RegistrationService.login(user).then(function() {
                 vm.modal.hide();
+                $rootScope.isAuth = true;
                 $state.go('app.profile');
             }, function(error) {
                 RegistrationService.getError(error);
             });
         }
+
+
 
     }
 

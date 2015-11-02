@@ -8,13 +8,16 @@ module.exports = function(app) {
     function service($rootScope, Firebase, $firebaseArray, firebaseConst, $firebaseAuth, $state, $ionicLoading, $cordovaToast) {
         var ref = new Firebase(firebaseConst.FBURL);
         $rootScope.authObj = $firebaseAuth(ref);
+        $rootScope.isAuth = ref.getAuth();
 
         function Service() {}
 
         Service.prototype = {
             createUser: createUser,
             login: login,
-            getError: getError
+            getError: getError,
+            isAuth: isAuth,
+            logOut: logOut
         };
 
         return new Service();
@@ -79,6 +82,15 @@ module.exports = function(app) {
                 default:
                     console.log('Error logging user in:', error);
             }
+        }
+
+        function isAuth() {
+            return (ref.getAuth()) ? true : false;
+        }
+
+        function logOut() {
+            ref.unauth();
+            $state.go('app.home');
         }
 
     }
