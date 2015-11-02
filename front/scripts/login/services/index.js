@@ -2,6 +2,6 @@
 
 module.exports = function(app) {
     // inject:start
-    require('./users.service')(app);
+    require('./registration.service')(app);
     // inject:end
 };

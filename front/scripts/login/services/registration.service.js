@@ -1,5 +1,5 @@
 'use strict';
-var servicename = 'UsersService';
+var servicename = 'RegistrationService';
 
 module.exports = function(app) {
 

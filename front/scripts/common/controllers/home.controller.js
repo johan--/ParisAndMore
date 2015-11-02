@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', 'main.login.UsersService', '$ionicModal', '$state'];
+    var deps = ['$scope', 'main.login.RegistrationService', '$ionicModal', '$state'];
 
-    function controller($scope, UsersService, $ionicModal, $state) {
+    function controller($scope, RegistrationService, $ionicModal, $state) {
         var vm = this;
         vm.controllername = fullname;
         vm.modal = $ionicModal.fromTemplate(require('../../login/views/login.html'), {scope: $scope});
@@ -30,11 +30,11 @@ module.exports = function(app) {
         }
 
         function doLogin(user) {
-            UsersService.login(user).then(function() {
+            RegistrationService.login(user).then(function() {
                 vm.modal.hide();
                 $state.go('app.profile');
             }, function(error) {
-                UsersService.getError(error);
+                RegistrationService.getError(error);
             });
         }
 

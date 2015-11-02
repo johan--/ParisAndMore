@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = [app.name + '.UsersService'];
+    var deps = [app.name + '.RegistrationService'];
 
-    function controller(UsersService) {
+    function controller(RegistrationService) {
         var vm = this;
         vm.controllername = fullname;
         vm.registerUser = registerUser;
@@ -19,7 +19,7 @@ module.exports = function(app) {
 
         function registerUser(user) {
             console.log(user);
-            UsersService.createUser(user);
+            RegistrationService.createUser(user);
         }
     }
 
