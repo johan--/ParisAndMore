@@ -7,6 +7,7 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
+  <preference name="AndroidLaunchMode" value="singleTask" />
   <preference name="AllowInlineMediaPlayback" value="true"/>
   <preference name="EnableLocation" value="true"/>
   <preference name="HideKeyboardFormAccessoryBar" value="false"/>
