@@ -60,7 +60,8 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         .state('app', {
             url: '/app',
             abstract: true,
-            template: require('./common/views/menu.html')
+            template: require('./common/views/menu.html'),
+            controller: 'main.common.menu as menuCtrl'
         })
         .state('app.home', {
             url: '/home',

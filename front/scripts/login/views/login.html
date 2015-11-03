@@ -6,16 +6,22 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="doLogin(user)">
+    <form name="loginForm" ng-submit="doLogin(user)">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Email</span>
-          <input type="text" ng-model="user.email">
+          <input type="email" name="uEmail" ng-model="user.email" required>
         </label>
+        <div ng-show="loginForm.$submitted || loginForm.uEmail.$touched">
+            <div ng-show="loginForm.uEmail.$error.required">Veuillez renseigner votre email.</div>
+        </div>
         <label class="item item-input">
           <span class="input-label">Mot de Passe</span>
-          <input type="password" ng-model="user.password">
+          <input type="password" name="uPassword" ng-model="user.password" required>
         </label>
+        <div ng-show="loginForm.$submitted || loginForm.uPassword.$touched">
+            <div ng-show="loginForm.uPassword.$error.required">Veuillez renseigner votre mot de passe.</div>
+        </div>
         <label class="item">
           <button class="button button-block button-positive" type="submit">S'identifier</button>
         </label>
