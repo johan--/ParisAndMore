@@ -13,8 +13,8 @@ module.exports = function(app) {
         var venueId = $stateParams.venueId;
         vm.controllername = fullname;
         vm.getVenue = getVenue;
+        vm.getRate = getRate;
         vm.takePicture = takePicture;
-
         activate();
 
         function activate() {
@@ -30,7 +30,10 @@ module.exports = function(app) {
             }).then(function(result) {
                 console.log(result);
                 vm.venue = result.response.venue;
+                vm.venue.ratingTab = [];
+                vm.getRate(vm.venue.rating);
                 $ionicLoading.hide();
+
             });
         }
 
@@ -46,6 +49,13 @@ module.exports = function(app) {
             // Ruh-roh, something bad happened
 
           });
+        }
+
+        function getRate(rating){
+            vm.venue.rating = Math.round(rating/2);
+            for(var i = 0; i < vm.venue.rating; i++){
+                 vm.venue.ratingTab.push(true);
+            }
         }
 
     }

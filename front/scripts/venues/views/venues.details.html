@@ -2,12 +2,32 @@
     <ion-tabs class="tabs-positive tabs-icon-only">
         <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
             <ion-view>
-                <ion-content>
+                <ion-content class="venues-details">
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
-                    <h1>{{ venueCtrl.venue.name }}</h1>
-                    <span style="background-color:#{{ venueCtrl.venue.ratingColor }}">Note: {{ venueCtrl.venue.rating }}</span>
-                    <p>{{ venueCtrl.venue.description }}</p>
-                    <md-button class="md-raised md-primary" ng-click="venueCtrl.takePicture()">En savoir plus</md-button>
+                    <div class="wrap">
+                         <h1>{{ venueCtrl.venue.name }}</h1>
+                          
+                        <ul class="rating">
+                            <li ng-repeat="note in venueCtrl.venue.ratingTab track by $index">
+                                <ng-md-icon icon="grade" style="fill:#{{ venueCtrl.venue.ratingColor }}" size="20"></ng-md-icon>
+                            </li>
+                        </ul>
+
+                        <p>{{ venueCtrl.venue.description }}</p>
+
+                        <h3>Contacts</h3>
+                        <p> 
+                            Adresse : 
+                            {{ venueCtrl.venue.location.address }}, {{ venueCtrl.venue.location.postalCode }} {{ venueCtrl.venue.location.city }} </p>
+                        <p>
+                            Téléphone :
+                            {{ venueCtrl.venue.contact.formattedPhone }}
+                        </p>
+                        <a ng-if="venueCtrl.venue.url" href="{{ venueCtrl.venue.url}}" target="_blank"> Voir le site web</a>
+                        <!-- 
+                        <md-button class="md-raised md-primary" ng-click="venueCtrl.takePicture()">En savoir plus</md-button>
+                        -->
+                    </div>
                 </ion-content>
             </ion-view>
         </ion-tab>

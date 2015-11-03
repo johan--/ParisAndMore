@@ -1,12 +1,13 @@
 @import "../../node_modules/ionic-sdk/scss/ionic.scss";
 @import "../../node_modules/font-awesome/scss/font-awesome.scss";
 
+
 @import "../../bower_components/famous-angular/dist/famous-angular";  
-  
-
-
 @import "../../node_modules/angular-material/angular-material";
 
+@import "home.scss"; 
+@import "subscription.scss"; 
+@import "venues-details.scss"; 
 
 .full-screen {
     position: fixed;
@@ -14,6 +15,7 @@
     top: 0;
     left: 0;
     right: 0;
+
 }
 
 .full-height,
