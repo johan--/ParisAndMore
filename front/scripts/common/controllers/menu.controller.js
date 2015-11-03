@@ -5,20 +5,23 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$rootScope', '$scope', '$ionicPopover', 'main.login.RegistrationService'];
+    var deps = ['$rootScope', '$scope', '$ionicPopover', 'main.login.RegistrationService', 'main.common.firebaseConst'];
 
-    function controller($rootScope, $scope, $ionicPopover, RegistrationService) {
+    function controller($rootScope, $scope, $ionicPopover, RegistrationService, firebaseConst) {
         var vm = this;
         vm.controllername = fullname;
 
-        var activate = function() {
-
-        };
         activate();
 
-        $scope.popover = $ionicPopover.fromTemplate(require('../views/menupopover.html'), {
-            scope: $scope,
-        });
+        function activate() {
+            var ref = new Firebase(firebaseConst.FBURL);
+            $rootScope.isConnected = (ref.getAuth()) ? true : false;
+
+            $scope.popover = $ionicPopover.fromTemplate(require('../views/menupopover.html'), {
+                scope: $scope,
+            });
+
+        }
 
         $scope.logOut = function() {
             console.log('logout');

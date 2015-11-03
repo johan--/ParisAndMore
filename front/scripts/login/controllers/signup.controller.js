@@ -5,17 +5,20 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = [app.name + '.RegistrationService'];
+    var deps = [app.name + '.RegistrationService', '$state'];
 
-    function controller(RegistrationService) {
+    function controller(RegistrationService, $state) {
         var vm = this;
         vm.controllername = fullname;
         vm.registerUser = registerUser;
 
-        var activate = function() {
-
-        };
         activate();
+
+        function activate() {
+            if(RegistrationService.isAuth()) {
+                $state.go('app.home');
+            }
+        }
 
         function registerUser(user) {
             console.log(user);

@@ -8,7 +8,6 @@ module.exports = function(app) {
     function service($rootScope, Firebase, $firebaseArray, firebaseConst, $firebaseAuth, $state, $ionicLoading, $cordovaToast) {
         var ref = new Firebase(firebaseConst.FBURL);
         $rootScope.authObj = $firebaseAuth(ref);
-        $rootScope.isAuth = ref.getAuth();
 
         function Service() {}
 
@@ -37,6 +36,7 @@ module.exports = function(app) {
                         var users = ref.child('users/' + fbAuth.uid);
                         users.set(user);
                         $ionicLoading.hide();
+                        $rootScope.isConnected = true;
                         $state.go('app.profile');
                     });
                 }, function(error) {
@@ -90,6 +90,7 @@ module.exports = function(app) {
 
         function logOut() {
             ref.unauth();
+            $rootScope.isConnected = false;
             $state.go('app.home');
         }
 

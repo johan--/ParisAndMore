@@ -9,7 +9,7 @@
         </button>
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
-        <button class="button button-icon ion-more" ng-click="popover.show($event)" ng-if="isAuth">
+        <button class="button button-icon ion-more" ng-click="popover.show($event)" style="display: {{ isConnected ? 'inline-block' : 'none' }}">
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>
