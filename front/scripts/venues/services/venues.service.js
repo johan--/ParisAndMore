@@ -26,20 +26,33 @@ module.exports = function(app) {
             var themes = [
                 {
                     name: 'Culture',
-                    image: null,
+                    image: './images/app/themes/culture.png',
                     // Related to foursquare categories id
                     // https://developer.foursquare.com/categorytree
                     // Art Gallery, Historic Site, Art Museum, History Museum
                     categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
                 },
                 {
-                    name: 'La Journée',
-                    image: null
+                    name: 'Art',
+                    image: './images/app/themes/art.png'
                 },
                 {
-                    name: 'La Nuit',
-                    image: null
+                    name: 'Musique',
+                    image: './images/app/themes/musique.png'
+                },
+                {
+                    name: 'Soirée',
+                    image: './images/app/themes/night.png'
+                },
+                {
+                    name: 'Sport',
+                    image: './images/app/themes/sport.png'
+                },
+                {
+                    name: 'Divertissement',
+                    image: './images/app/themes/divertissement.png'
                 }
+                
             ];
 
             return themes;

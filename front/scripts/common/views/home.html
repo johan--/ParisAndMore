@@ -9,17 +9,17 @@
 	      <div layout layout-sm="column">
 	        <md-input-container flex>
 	          <label>E-mail</label>
-	          <input ng-model="user.email">
+	          <input ng-model="user.email" required>
 	        </md-input-container>
 	        <md-input-container flex>
 	          <label>Mot de passe</label>
-	          <input  type="password" ng-model="user.password">
+	          <input  type="password" ng-model="user.password" required>
 	      </div>
 	        <md-button class="md-raised md-primary connexion-btn" type="submit" >Connexion</md-button>
+	    	<a ui-sref="app.signup">Pas encore membre ? inscrivez-vous gratuitement</a>
 	    </form>
 
 	    
-	    <md-button class="md-raised md-primary" ui-sref="app.signup">Je créé un compte</md-button>
     	<!--<md-button class="md-raised md-primary" ng-click="homeCtrl.openModal()">Je m'identifie</md-button>-->
     </md-content>
   </ion-content>

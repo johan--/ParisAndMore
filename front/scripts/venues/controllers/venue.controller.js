@@ -14,6 +14,7 @@ module.exports = function(app) {
         vm.controllername = fullname;
         vm.getVenue = getVenue;
         vm.getRate = getRate;
+        vm.getDays = getDays;
         vm.takePicture = takePicture;
         activate();
 
@@ -28,13 +29,43 @@ module.exports = function(app) {
             VenuesService.getVenue({
                 venueId: venueId
             }).then(function(result) {
-                console.log(result);
                 vm.venue = result.response.venue;
+                console.log(vm.venue);
+                
                 vm.venue.ratingTab = [];
                 vm.getRate(vm.venue.rating);
+                vm.getDays(vm.venue.popular.timeframes);
                 $ionicLoading.hide();
 
             });
+        }
+
+        function getDays(days) {
+            vm.venue.days = [];
+            var jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
+
+            if(days.length < 7)
+                jours.push('Samedi & Dimanche');
+            else
+                jours.push('Samedi', 'Dimanche');
+
+            for(var j = 0; j < days.length; j++ ){
+
+                if( j == 0){
+                    vm.venue.days.push({
+                        name : jours[j],
+                        horaire : days[days.length - 1].open[0].renderedTime
+                    });
+                }else{
+                    vm.venue.days.push({
+                        name : jours[j],
+                        horaire : days[j - 1].open[0].renderedTime
+                    });
+                }
+
+                if(vm.venue.days[j].horaire == 'Aucun')
+                    vm.venue.days[j].horaire = 'Fermé';
+            }
         }
 
         function takePicture() {

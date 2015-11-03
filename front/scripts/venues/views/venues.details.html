@@ -24,6 +24,18 @@
                             {{ venueCtrl.venue.contact.formattedPhone }}
                         </p>
                         <a ng-if="venueCtrl.venue.url" href="{{ venueCtrl.venue.url}}" target="_blank"> Voir le site web</a>
+
+                        <h3>Ouvertures</h3>
+                        <table class="horaires">
+                            <tr>
+                                <td>Jour</td>
+                                <td>Horaires</td>
+                            </tr>
+                            <tr ng-repeat="day in venueCtrl.venue.days">
+                                <td>{{day.name}}</td>
+                                <td>{{day.horaire}}</td>
+                            </tr>
+                        </table>
                         <!-- 
                         <md-button class="md-raised md-primary" ng-click="venueCtrl.takePicture()">En savoir plus</md-button>
                         -->
@@ -36,13 +48,7 @@
                 <ion-content>
                     <img ng-src="https://irs0.4sqi.net/img/general/300x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
                     <h1>{{ venueCtrl.venue.name }}</h1>
-                    <span>Ouverture: {{ venueCtrl.venue.popular.isOpen }}</span>
-                    <p>Ouvert le:</p>
-                    <ul>
-                        <li ng-repeat="time in venueCtrl.venue.popular.timeframes">
-                            {{ time.days }}
-                        </li>
-                    </ul>
+                    
                 </ion-content>
             </ion-view>
         </ion-tab>

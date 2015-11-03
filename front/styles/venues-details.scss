@@ -17,4 +17,18 @@
 			}
 		}
 	}
+	.horaires{
+		width: 100%;
+		margin: 20px 0;
+		tr{
+			&:first-child{
+				background: #3c3c3c;
+				color: #ffffff;
+			}
+		}
+		td{
+			border: 1px solid #3c3c3c;
+			padding: 9px 30px;
+		}
+	}
 }

@@ -1,0 +1,13 @@
+/* Couleurs */
+$main-color: #005eb5;
+
+/* Selecteurs de bases*/
+a{
+	text-decoration: none;
+	color: $main-color;
+}
+
+/* Contnairs */
+.pane, .view {
+    /*padding-top: 44px;*/
+}
