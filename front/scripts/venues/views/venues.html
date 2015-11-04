@@ -1,8 +1,14 @@
-<ion-view view-title="Catégories">
+<ion-view view-title="Catégories" class="venues">
   <ion-content>
     <ion-list>
       <ion-item md-ink-ripple ng-repeat="venue in venuesCtrl.venues" ui-sref="app.venue({venueId:venue.id})">
-        {{ venue.name }}
+        <div class="content-building">
+        	<img src="{{ venue.categories[0].icon.prefix }}bg_32{{ venue.categories[0].icon.suffix }}" />
+        	<span>
+        		{{ venue.name }}
+        	</span>
+        </div>
+        
       </ion-item>
     </ion-list>
   </ion-content>

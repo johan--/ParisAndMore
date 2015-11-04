@@ -12,7 +12,6 @@ module.exports = function(app) {
 
         vm.getThemes = getThemes;
         vm.setVenuesCats = setVenuesCats;
-
         activate();
 
         function activate() {
