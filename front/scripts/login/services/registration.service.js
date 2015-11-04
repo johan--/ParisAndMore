@@ -16,7 +16,8 @@ module.exports = function(app) {
             login: login,
             getError: getError,
             isAuth: isAuth,
-            logOut: logOut
+            logOut: logOut,
+            getFirebaseReference: getFirebaseReference
         };
 
         return new Service();
@@ -92,6 +93,10 @@ module.exports = function(app) {
             ref.unauth();
             $rootScope.isConnected = false;
             $state.go('app.home');
+        }
+
+        function getFirebaseReference() {
+            return ref;
         }
 
     }
