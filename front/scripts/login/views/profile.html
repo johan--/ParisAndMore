@@ -1,6 +1,10 @@
-<ion-view view-title="Profil">
+<ion-view view-title="Bonjour {{ user.name }}">
     <ion-content>
         <h1>Profile</h1>
-        <button ng-click="profileCtrl.upload()">UPLOAD</button>
+        <button ng-click="takePhoto()">UPLOAD</button>
+        <button ng-click="profileCtrl.addInfo()">INFOS</button>
+        <input type="test" ng-model="user.name">
+        <p ng-model="user">{{ user.name }}</p>
+        <textarea ng-model="user.description">Message: {{ user.description }}</textarea>
     </ion-content>
 </ion-view>

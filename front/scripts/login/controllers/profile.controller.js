@@ -5,38 +5,69 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$rootScope', 'main.login.RegistrationService', '$state', '$cordovaCamera'];
+    var deps = ['$scope', '$rootScope', 'main.login.RegistrationService', '$state', '$cordovaCamera', '$firebaseObject'];
 
-    function controller($rootScope, RegistrationService, $state, $cordovaCamera) {
+    function controller($scope, $rootScope, RegistrationService, $state, $cordovaCamera, $firebaseObject) {
         var vm = this;
         vm.controllername = fullname;
-        vm.upload = upload;
+        var fb = RegistrationService.getFirebaseReference();
+        var fbAuth = fb.getAuth();
+        vm.addInfo = addInfo;
+
+        var userSync = $firebaseObject(fb.child('users/' + fbAuth.uid));
+        userSync.$bindTo($scope, 'user');
+
+        //vm.upload = upload;
 
         activate();
 
         function activate() {
-            if(!RegistrationService.isAuth()) {
+            // Check if auth
+            /*if(fbAuth) {
+                console.log(fbAuth);
+                fb.child('users/' + fbAuth.uid).on('value', function(snapshot) {
+                    console.log(snapshot.val());
+                    $scope.user = snapshot.val();
+                    console.log($scope.user);
+                });*/
+
+                //vm.userReference = $firebaseObject(fb.child('users/' + fbAuth.uid));
+
+            /*} else {
                 $state.go('app.home');
-            }
+            }*/
         }
 
-        function upload() {
-            var options = {
+        $scope.takePhoto = function() {
+            navigator.camera.getPicture(onSuccess, onFail, {
                 quality: 75,
-                destinationType: Camera.DestinationType.DATA_URL,
-                sourceType: Camera.PictureSourceType.CAMERA,
-                allowEdit: true,
-                encodingType: Camera.EncodingType.JPEG,
-                popoverOptions: CameraPopoverOptions,
-                targetWidth: 300,
-                targetHeight: 300,
-                saveToPhotoAlbum: false
-            };
-            $cordovaCamera.getPicture(options).then(function(imageData) {
-                console.log(imageData);
-            }, function(error) {
-                console.log(error);
+                targetWidth: 320,
+                targetHeight: 320,
+                destinationType: 0
             });
+           function onSuccess(imageData) {
+                 alert('onSuccess');
+                 console.log("data:image/jpeg;base64,"+imageData);
+            }
+
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
+        };
+
+        function addInfo() {
+            var test = fb.child('users/' + fbAuth.uid).on('value', function(snapshot) {
+                console.log(snapshot.val());
+            });
+            /*vm.userReference.$add({
+                email: vm.userReference.email,
+                name: vm.userReference.name,
+                password: vm.userReference.password,
+                message: 'bonjour tout le monde',
+                test: 'coucou'
+            }, function() {
+                console.log('info ajotuée');
+            });*/
         }
 
     }

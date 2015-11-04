@@ -6,7 +6,7 @@
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
                     <div class="wrap">
                          <h1>{{ venueCtrl.venue.name }}</h1>
-                          
+
                         <ul class="rating">
                             <li ng-repeat="note in venueCtrl.venue.ratingTab track by $index">
                                 <ng-md-icon icon="grade" style="fill:#{{ venueCtrl.venue.ratingColor }}" size="20"></ng-md-icon>
@@ -16,8 +16,8 @@
                         <p>{{ venueCtrl.venue.description }}</p>
 
                         <h3>Contacts</h3>
-                        <p> 
-                            Adresse : 
+                        <p>
+                            Adresse :
                             {{ venueCtrl.venue.location.address }}, {{ venueCtrl.venue.location.postalCode }} {{ venueCtrl.venue.location.city }} </p>
                         <p>
                             Téléphone :
@@ -36,7 +36,7 @@
                                 <td>{{day.horaire}}</td>
                             </tr>
                         </table>
-                        <!-- 
+                        <!--
                         <md-button class="md-raised md-primary" ng-click="venueCtrl.takePicture()">En savoir plus</md-button>
                         -->
                     </div>
@@ -46,9 +46,9 @@
         <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
             <ion-view>
                 <ion-content>
-                    <img ng-src="https://irs0.4sqi.net/img/general/300x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
+                    <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
                     <h1>{{ venueCtrl.venue.name }}</h1>
-                    
+
                 </ion-content>
             </ion-view>
         </ion-tab>

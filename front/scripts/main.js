@@ -19,6 +19,7 @@ var app = angular.module(namespace, ['ionic', 'ngMaterial', 'firebase', 'ngMdIco
     // inject:modules start
     require('./common')(namespace).name,
     require('./login')(namespace).name,
+    require('./users')(namespace).name,
     require('./venues')(namespace).name
     // inject:modules end
 ]);
@@ -87,6 +88,24 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
                 'menuContent': {
                     template: require('./login/views/profile.html'),
                     controller: 'main.login.profile as profileCtrl'
+                }
+            }
+        })
+        .state('app.rooms', {
+            url: '/rooms',
+            views: {
+                'menuContent': {
+                    template: require('./users/views/rooms.html'),
+                    controller: 'main.users.rooms as roomsCtrl'
+                }
+            }
+        })
+        .state('app.room', {
+            url: '/rooms/:roomId',
+            views: {
+                'menuContent': {
+                    template: require('./users/views/room.html'),
+                    controller: 'main.users.room as roomCtrl'
                 }
             }
         })
