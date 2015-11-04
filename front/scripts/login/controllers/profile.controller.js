@@ -17,6 +17,7 @@ module.exports = function(app) {
         var userSync = $firebaseObject(fb.child('users/' + fbAuth.uid));
         userSync.$bindTo($scope, 'user');
 
+
         //vm.upload = upload;
 
         activate();
@@ -69,6 +70,7 @@ module.exports = function(app) {
                 console.log('info ajotuée');
             });*/
         }
+        var id = 0;
 
     }
 
