@@ -4,8 +4,12 @@
 		h1{
 			font-size: 26px;
 			text-transform: uppercase;
-			text-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+			text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 			margin: 10px 0;
+		}
+		h3{
+			padding: 10px 0 7px 0;
+			margin:0;
 		}
 		.rating{
 			width: 100%;
@@ -13,8 +17,15 @@
 			margin-bottom: 10px;
 			li{
 				display: inline-block;
+				svg{
+					fill: $main-color;
+				}
 
 			}
+		}
+
+		md-list-item.md-3-line, md-list-item.md-3-line > .md-no-style{
+			padding: 10px 0;
 		}
 	}
 	.horaires{

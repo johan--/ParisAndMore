@@ -1,15 +1,15 @@
-<ion-view view-title="{{ venueCtrl.venue.name }}" cache-view="false">
+<ion-view view-title="{{ venueCtrl.venue.name }}" cache-view="false" class="venues-details">
     <ion-tabs class="tabs-positive tabs-icon-only">
         <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
             <ion-view>
-                <ion-content class="venues-details">
+                <ion-content>
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
                     <div class="wrap">
                          <h1>{{ venueCtrl.venue.name }}</h1>
 
                         <ul class="rating">
                             <li ng-repeat="note in venueCtrl.venue.ratingTab track by $index">
-                                <ng-md-icon icon="grade" style="fill:#{{ venueCtrl.venue.ratingColor }}" size="20"></ng-md-icon>
+                                <ng-md-icon icon="grade"  size="20"></ng-md-icon>
                             </li>
                         </ul>
 
@@ -32,8 +32,20 @@
                                 <td>Horaires</td>
                             </tr>
                             <tr ng-repeat="day in venueCtrl.venue.days">
-                                <td>{{day.name}}</td>
-                                <td>{{day.horaire}}</td>
+     
+                                   <td ng-if="day.days == 'Aujourd\'hui'">
+                                        <b>{{day.days}}</b>
+                                    </td>
+                                    <td ng-if="day.days == 'Aujourd\'hui'">
+                                        <b>{{day.horaire}}</b>
+                                    </td>
+
+                                    <td ng-if="day.days != 'Aujourd\'hui'">
+                                        {{day.days}}
+                                    </td>
+                                    <td ng-if="day.days != 'Aujourd\'hui'">
+                                        {{day.horaire}}
+                                    </td>
                             </tr>
                         </table>
                         <!--
@@ -47,8 +59,21 @@
             <ion-view>
                 <ion-content>
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
-                    <h1>{{ venueCtrl.venue.name }}</h1>
-
+                    <div class="wrap" >
+                        <h3>Commentaires</h3>
+                        <md-list>
+                            <md-list-item class="md-3-line" ng-repeat="advice in venueCtrl.venue.tips.groups[0].items">
+                                <div class="md-list-item-text">
+                                   <b>
+                                       {{advice.user.firstName}}
+                                   </b> 
+                                   <p class="advices">
+                                        "{{advice.text}}"
+                                    </p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </div>
                 </ion-content>
             </ion-view>
         </ion-tab>
