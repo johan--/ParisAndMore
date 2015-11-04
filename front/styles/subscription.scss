@@ -1,0 +1,65 @@
+.subscription{
+	background: url('../../images/app/generics/bg-02.jpg') no-repeat;
+	background-size: cover;
+
+	form{
+		width: calc(100% - 20px);
+		display: block;
+		margin: auto;
+		.flex{
+			padding-bottom: 3px;
+		}
+		input{
+			background: #ffffff;
+			height: 40px;
+			padding-left: 10px;
+		}
+		label{
+			padding-left: 10px;
+			line-height: 17px;
+			font-size: 18px;
+		}
+		.subscription-btn{
+			display: block;
+		    display: block;
+		    margin: 15px auto;
+		    line-height: 20px;
+		    padding: 10px 20px;
+		    font-size: 16px;
+		    background: #005eb5;
+		}
+
+		.msg-error{
+			color: #ffffff;
+		    font-size: 16px;
+		    font-weight: 700;
+		    text-shadow: 2px 2px 2px #000000;
+		}
+	}
+	md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused, md-input-container:not(.md-input-invalid).md-input-focused .md-input{
+		border-color: #005eb5;
+	}
+
+	md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused, md-input-container:not(.md-input-invalid).md-input-focused label{
+		color: #ffffff;
+		font-size: 20px;
+	}
+
+	md-input-container.md-default-theme:not(.md-input-invalid).md-input-has-value, md-input-container:not(.md-input-invalid).md-input-has-value label{
+		color: #ffffff;
+
+	}
+	#logo{
+		width: 143px;
+		display: block;
+    	margin: 40px auto;
+	}
+	
+	p{
+		text-align: center;
+		color: #ffffff;
+		font-size: 19px;
+		text-transform: uppercase;
+		text-shadow: 2px 2px 2px #000000;
+	}
+}

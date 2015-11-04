@@ -1,28 +1,42 @@
-<ion-view view-title="Création de compte">
+<ion-view view-title="Création de compte" class="subscription">
     <ion-content>
+        <img src="./images/app/generics/logo.png" id="logo">
+          
+
+
         <form name="form" no-validate ng-submit="form.$valid && signupCtrl.registerUser(user)">
-            <md-input-container md-no-float class="md-block">
-                <ng-md-icon icon="person" style="fill: dodgerblue; position:absolute; top:5px; left:3px;" size="24"></ng-md-icon>
-                <input ng-model="user.name" name="uName" type="text" placeholder="Name" style="margin-left:25px;" required maxlength="15">
-            </md-input-container>
-            <div ng-show="form.$submitted || form.uName.$touched">
-                <div ng-show="form.uName.$error.required">Veuillez remplir votre nom.</div>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Nom</label>
+                    <input ng-model="user.name" name="uName" type="text" required>
+                    <div ng-show="form.$submitted || form.uName.$touched">
+                        <div ng-show="form.uName.$error.required" class="msg-error">
+                            Veuillez remplir votre nom.
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>E-mail</label>
+                    <input ng-model="user.email" name="uEmail" type="email" required>
+                    <div ng-show="form.$submitted || form.uEmail.$touched">
+                        <div ng-show="form.uEmail.$error.required" class="msg-error">
+                            Veuillez indiquer votre email.
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Mot de passe</label>
+                    <input ng-model="user.password" name="uPassword" type="password" required>
+                    <div ng-show="form.$submitted || form.uPassword.$touched">
+                        <div ng-show="form.uPassword.$error.required" class="msg-error">
+                            Veuillez indiquer un mot de passe.
+                        </div>
+                    </div>
+                </md-input-container>
             </div>
-            <md-input-container md-no-float class="md-block">
-                <ng-md-icon icon="email" style="fill: dodgerblue; position:absolute; top:5px; left:3px;" size="24"></ng-md-icon>
-                <input ng-model="user.email" name="uEmail" type="email" placeholder="Email" style="margin-left:25px;" required maxlength="30">
-            </md-input-container>
-            <div ng-show="form.$submitted || form.uEmail.$touched">
-                <div ng-show="form.uEmail.$error.required">Veuillez indiquer votre email.</div>
-            </div>
-            <md-input-container md-no-float class="md-block">
-                <ng-md-icon icon="lock" style="fill: dodgerblue; position:absolute; top:5px; left:3px;" size="24"></ng-md-icon>
-                <input ng-model="user.password" name="uPassword" type="password" placeholder="Mot de passe" style="margin-left:25px;" required maxlength="15">
-            </md-input-container>
-            <div ng-show="form.$submitted || form.uPassword.$touched">
-                <div ng-show="form.uPassword.$error.required">Veuillez indiquer un mot de passe.</div>
-            </div>
-            <md-button type="submit" class="md-raised md-primary"><ng-md-icon icon="send" style="fill: dodgerblue; position:absolute; top:5px; left:3px;" size="24" options="{"duration":375}"></ng-md-icon></md-button>
+
+            <md-button type="submit" class="md-raised md-primary subscription-btn"> Inscription </ng-md-icon ></md-button>
+
         </form>
     </ion-content>
 </ion-view>

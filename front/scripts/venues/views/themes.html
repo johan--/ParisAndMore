@@ -1,9 +1,13 @@
 <ion-view view-title="Activités">
-  <ion-content>
+  <ion-content class="themes">
     <ion-list>
       <!--<ion-item md-ink-ripple ng-repeat="theme in themesCtrl.themes" ng-click="themesCtrl.goToVenues(this.$parent)">-->
-      <ion-item md-ink-ripple ng-repeat="theme in themesCtrl.themes" ui-sref="app.venues" ng-click="themesCtrl.setVenuesCats(this.$parent)">
-        {{ theme.name }}
+      <ion-item md-ink-ripple ng-repeat="theme in themesCtrl.themes" ui-sref="app.venues" ng-click="themesCtrl.setVenuesCats(this.$parent)" class="content-theme">
+        <span>
+        	{{ theme.name }}
+        </span>
+        <img src="{{theme.image}}" alt="{{ theme.name }}" />
+        <img src="./images/app/generics/filtre.png" alt="filtre" />
       </ion-item>
     </ion-list>
   </ion-content>

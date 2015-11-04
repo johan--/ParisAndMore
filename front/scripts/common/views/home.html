@@ -1,9 +1,26 @@
-<ion-view view-title="Accueil">
+<ion-view view-title="Accueil" class="home">
   <ion-content>
-    <h1>Logo</h1>
-    <p>Bienvenue Paris bla bla bla</p>
-    <p>Vous pouvez créer un compte pour accéder à plus de features bla la bla</p>
-    <md-button class="md-raised md-primary" ui-sref="app.signup">Je créé un compte</md-button>
-    <md-button class="md-raised md-primary" ng-click="homeCtrl.openModal()" style="display: {{ isConnected ? 'none' : 'inline-block' }}">Je m'identifie</md-button>
+    	<img src="./images/app/generics/logo.png" id="logo">
+    	<p>
+    		Découvrez la ville de Paris <br>
+    		et ses habitants !
+    	</p>
+	    <form name="userForm"  ng-submit="doLogin(user)">
+	      <div layout layout-sm="column">
+	        <md-input-container flex>
+	          <label>E-mail</label>
+	          <input ng-model="user.email" required>
+	        </md-input-container>
+	        <md-input-container flex>
+	          <label>Mot de passe</label>
+	          <input  type="password" ng-model="user.password" required>
+	      </div>
+	        <md-button class="md-raised md-primary connexion-btn" type="submit" >Connexion</md-button>
+	    	<a ui-sref="app.signup">Pas encore membre ? inscrivez-vous gratuitement</a>
+	    </form>
+
+	    
+    	<!--<md-button class="md-raised md-primary" ng-click="homeCtrl.openModal()">Je m'identifie</md-button>-->
+    </md-content>
   </ion-content>
 </ion-view>

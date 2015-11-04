@@ -1,0 +1,26 @@
+.themes{
+	.item-complex, a.item.item-complex, button.item.item-complex{
+		height: 200px;
+		border: 0;
+	}
+	.content-theme{
+		
+		a{
+			position: relative;
+			height: 200px;
+			img{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			span{
+				color: #ffffff;
+				position: absolute;
+				z-index: 2;
+				font-size: 22px;
+				text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+			}
+		}
+	}
+
+}
