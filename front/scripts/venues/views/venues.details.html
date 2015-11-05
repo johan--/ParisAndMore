@@ -4,10 +4,9 @@
             <ion-view>
                 <ion-content>
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
+                    <span style="font-size:40px; color:red; cursor:pointer; position:relative; right:50px; bottom: 10px" ng-class="venueCtrl.isLiked ? 'ion-ios-heart' : 'ion-ios-heart-outline'" ng-click="venueCtrl.like(venueCtrl.venue)"></span>
                     <div class="wrap">
-                         <h1>{{ venueCtrl.venue.name }}</h1><button ng-click="venueCtrl.like(venueCtrl.venue)">LIKE ME</button>
-                         <p>isLiked? {{ isLiked ? 'oui' : 'non' }}</p>
-                         <p ng-show="!venueCtrl.isLiked">TEST</p>
+                        <h1>{{ venueCtrl.venue.name }}</h1>
 
                         <ul class="rating">
                             <li ng-repeat="note in venueCtrl.venue.ratingTab track by $index">
@@ -51,9 +50,6 @@
                                     </td>
                             </tr>
                         </table>
-                        <!--
-                        <md-button class="md-raised md-primary" ng-click="venueCtrl.takePicture()">En savoir plus</md-button>
-                        -->
                     </div>
                 </ion-content>
             </ion-view>
@@ -80,7 +76,7 @@
                 </ion-content>
             </ion-view>
         </ion-tab>
-        <ion-tab title="Settings" icon-on="ion-ios-person" icon-off="ion-ios-person-outline">
+        <ion-tab title="Settings" icon-on="ion-ios-people" icon-off="ion-ios-people-outline">
             <ion-view>
                 <ion-content>
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
@@ -91,7 +87,6 @@
                         </md-list-item>
                 </ion-content>
             </ion-view>
-        <!-- Tab 3 content -->
         </ion-tab>
     </ion-tabs>
 </ion-view>

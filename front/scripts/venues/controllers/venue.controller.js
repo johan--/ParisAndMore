@@ -11,11 +11,9 @@ module.exports = function(app) {
         var vm = this;
         var venueId = $stateParams.venueId;
         vm.controllername = fullname;
-        console.log(vm.controllername);
         vm.getVenue = getVenue;
         vm.getRate = getRate;
         vm.getDays = getDays;
-        vm.takePicture = takePicture;
         vm.like = like;
         vm.checkLike = checkLike;
         vm.getLikers = getLikers;
@@ -87,7 +85,6 @@ module.exports = function(app) {
             var users = $firebaseArray(FirebaseService.getFirebaseReference().child('users'));
             users.$loaded(function(result) {
                 angular.forEach(result, function(liker, key) {
-                    console.log(liker.$id);
                     if(liker.venues && liker.$id !== FirebaseService.getAuthUid()) {
                         angular.forEach(liker.venues, function(value, key) {
                             if(key === venueId) {
