@@ -33,7 +33,8 @@
                                 <td>Jour</td>
                                 <td>Horaires</td>
                             </tr>
-                            <tr ng-repeat="day in venueCtrl.venue.days">
+
+                            <tr ng-repeat="day in venueCtrl.venue.jour">
 
                                    <td ng-if="day.days == 'Aujourd\'hui'">
                                         <b>{{day.days}}</b>

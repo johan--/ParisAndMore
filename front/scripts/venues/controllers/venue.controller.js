@@ -79,70 +79,52 @@ module.exports = function(app) {
 
         function getDays(days) {
             vm.venue.days = [];
-            var jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-            var k = 0, l = 0, m = 0, twoDays = null;
-            vm.venue.currentDay = new Date().getUTCDay();
 
-            //Parcer le tableau afin de récuper les objets qui contiennet 2 jour ex: 'lundi. -mar' et les séparer
-            for(var i = 0; i < jours.length-1; i++ ){
+            var jours = [];
+            vm.venue.monday = 0;
+            vm.venue.currendDay = null;
+            var k = 0, m =0;
 
-                if(days[i].days && days[i].days.indexOf("–") > -1)
-                    //Vérifier s'il y a un un objet qui contien 2 jours
-                    twoDays = i;
-                if(twoDays != null){
-                    if(m > jours.length - twoDays){
-                        //réporter des valeurs des index i à i +1 (on décale les valeurs)
-                        days.push({
-                            days : days[jours.length - m].days,
-                            horaire: days[jours.length - m].open[0].renderedTime
-                        });
-                        m++;
-                    }else{
-                        //Une fois décalé, on duplique les valeurs de l'objet qui contient 2 jours
-                        if(days[twoDays+1]){
-                            days[twoDays+1].days = days[twoDays].days;
-                            days[twoDays+1].horaire = days[twoDays].open[0].renderedTime;
-                        }else{
-                            days.push({
-                                days : days[twoDays].days,
-                                horaire: days[twoDays].open[0].renderedTime
-                            });
-                        }
-
-                        m = 0, twoDays = null;
-                    }
-                }
-                days[i].days = days[i].days;
-                days[i].horaire = days[i].open[0].renderedTime;
+            for(var i = 0; i < days.length; i++ ){
+                if(days[i].days.indexOf("lun") > -1)
+                   vm.venue.monday = i;
+               if(days[i].days.indexOf("Aujourd'hui") > -1)
+                   vm.venue.currendDay = i;
             }
 
-            //Parcer les heures d'ouvertures et les jours afin de synchroniser les deux sur la même ligne
-            for(var j = 0; j < jours.length ; j++ ){
+            for(var j = 0; j < days.length ; j++){
 
-                if(k < jours.length - vm.venue.currentDay){
-                    //Afficher les heures des jours AVANT le currentDay (aujourd'hui)
+                if(j < days.length - vm.venue.monday ){
 
-                    vm.venue.days.push({
-                        days : jours[j],
-                        horaire : days[k].horaire
+                  jours.push({
+                        days : days[vm.venue.monday + m].days,
+                        horaire : days[vm.venue.monday + m].open[0].renderedTime
                     });
-                    k++;
+                    m++;
 
                 }else{
-                    //Afficher les heures des jours APRES le currentDay (aujourd'hui)
-                    l++;
-                    vm.venue.days.push({
-                        days : jours[j],
-                        horaire : days[l].open[0].renderedTime
+                   jours.push({
+                        days : days[k].days,
+                        horaire : days[k].open[0].renderedTime
                     });
+                    k++;
                 }
 
-                //Afficher fermé lorsque qu'un objet heure vaut 'Aucun' & remplace le curentDay par Aujourd'hui
-                if(vm.venue.days[j].horaire == 'Aucun')
-                    vm.venue.days[j].horaire = 'Fermé';
-                if(vm.venue.currentDay -1 == j)
-                   vm.venue.days[j].days = "Aujourd'hui";
+                jours[j].days = jours[j].days.replace("lun.", "Lundi ");
+                jours[j].days = jours[j].days.replace("mar.", "Mardi ");
+                jours[j].days = jours[j].days.replace("mer.", "Mercredi ");
+                jours[j].days = jours[j].days.replace("jeu.", "Jeudi ");
+                jours[j].days = jours[j].days.replace("ven.", "Vendredi ");
+                jours[j].days = jours[j].days.replace("sam.", "Samedi ");
+                jours[j].days = jours[j].days.replace("dim.", "Dimanche ");
+                jours[j].days = jours[j].days.replace("–", "- ");
+
+                jours[j].horaire = jours[j].horaire.replace("–", " - ");
+
+               if(jours[j].horaire == 'Aucun')
+                    jours[j].horaire = 'Fermé';
             }
+            vm.venue.jour = jours;
         }
 
         function takePicture() {
