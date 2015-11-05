@@ -38,22 +38,40 @@ module.exports = function(app) {
                 $state.go('app.home');
             }*/
         }
-
+        var takingPhoto = false;
         $scope.takePhoto = function() {
-            navigator.camera.getPicture(onSuccess, onFail, {
-                quality: 75,
-                targetWidth: 320,
-                targetHeight: 320,
-                destinationType: 0
-            });
-           function onSuccess(imageData) {
-                 alert('onSuccess');
-                 console.log("data:image/jpeg;base64,"+imageData);
-            }
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                if(takingPhoto){
+                    takingPhoto = false;
+                    return;
+                }else
+                    takingPhoto = true;
 
-            function onFail(message) {
-                alert('Failed because: ' + message);
+               alert(navigator.camera);
+               var options = {
+                  quality: 80,
+                  destinationType: Camera.DestinationType.DATA_URL,
+                  sourceType: Camera.PictureSourceType.CAMERA,
+                  allowEdit: false,
+                  correctOrientation: true,
+                  encodingType: Camera.EncodingType.JPEG,
+                  popoverOptions: CameraPopoverOptions,
+                  saveToPhotoAlbum: false
+                };
+                navigator.camera.getPicture(onSuccess, onFail, {
+                    options
+                });
+               function onSuccess(imageData) {
+                     alert('onSuccess');
+                     console.log(imageData);
+                }
+
+                function onFail(message) {
+                    alert('Failed because: ' + message); 
+                }
             }
+            
         };
 
         function addInfo() {
