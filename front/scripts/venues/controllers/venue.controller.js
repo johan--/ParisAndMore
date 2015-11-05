@@ -14,7 +14,6 @@ module.exports = function(app) {
         vm.getVenue = getVenue;
         vm.getRate = getRate;
         vm.getDays = getDays;
-        vm.takePicture = takePicture;
         vm.like = like;
         vm.checkLike = checkLike;
         vm.getLikers = getLikers;
