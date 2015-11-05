@@ -9,13 +9,15 @@ var angular = require('angular');
 require('angular-ui-router');
 require('angular-animate');
 require('angular-sanitize');
+require('angular-moment');
+require('moment/locale/fr');
 require('angular-material-icons');
 require('firebase');
 require('angularfire');
 require('ionic');
 require('ionic-angular');
 require('angular-material');
-var app = angular.module(namespace, ['ionic', 'ngMaterial', 'firebase', 'ngMdIcons',
+var app = angular.module(namespace, ['ionic', 'ngMaterial', 'firebase', 'ngMdIcons', 'angularMoment',
     // inject:modules start
     require('./common')(namespace).name,
     require('./login')(namespace).name,
@@ -37,6 +39,7 @@ run.$inject = ['$ionicPlatform', '$rootScope', '$window'];
 function run($ionicPlatform, $window) {
 
     $ionicPlatform.ready(function() {
+        //moment.locale('fr');
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if ($window.cordova && $window.cordova.plugins.Keyboard) {

@@ -13,7 +13,7 @@ module.exports = function(app) {
         vm.getRoom = getRoom;
         vm.addMessage = addMessage;
         vm.getUserName = getUserName;
-
+        console.log(new Date());
         activate();
 
         function activate() {
@@ -32,7 +32,9 @@ module.exports = function(app) {
         }
 
         function addMessage() {
+            var timestamp = new Date().getTime();
             vm.messages.$add({
+                date: timestamp,
                 name: vm.userName,
                 message: vm.newMessage
             });

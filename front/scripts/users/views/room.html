@@ -5,6 +5,8 @@
         <div class="md-list-item-text" layout="column">
           <h3>{{ message.name }}</h3>
           <p>{{ message.message }}</p>
+          <span am-time-ago="{{ message.date }}"></span>
+          <span>{{message.date | amDateFormat:'MM.DD.YYYY HH:mm:ss'}}</span>
         </div>
       </md-list-item>
     </md-list>

@@ -5,17 +5,22 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = [app.name + '.VenuesService', '$stateParams', '$ionicLoading'];
+    var deps = ['$scope', app.name + '.VenuesService', '$stateParams', '$ionicLoading', 'main.common.FirebaseService', '$firebaseObject', '$firebaseArray'];
 
-    function controller(VenuesService, $stateParams, $ionicLoading) {
+    function controller($scope, VenuesService, $stateParams, $ionicLoading, FirebaseService, $firebaseObject, $firebaseArray) {
         var vm = this;
-        //console.log($stateParams);
         var venueId = $stateParams.venueId;
         vm.controllername = fullname;
+        console.log(vm.controllername);
         vm.getVenue = getVenue;
         vm.getRate = getRate;
         vm.getDays = getDays;
         vm.takePicture = takePicture;
+        vm.like = like;
+        vm.checkLike = checkLike;
+        vm.getLikers = getLikers;
+        vm.likers = [];
+
         activate();
 
         function activate() {
@@ -23,6 +28,9 @@ module.exports = function(app) {
                 template: 'loading'
             });
             vm.getVenue();
+            vm.checkLike(venueId);
+            vm.getLikers();
+
         }
 
         function getVenue() {
@@ -38,8 +46,65 @@ module.exports = function(app) {
             });
         }
 
+        function checkLike(venueId) {
+            var userReference = FirebaseService.getAuthDatas();
+            var userLikes = userReference.child('venues/' + venueId);
+            FirebaseService.getAuthDatas().child('venues').child(venueId).once('value', function(snapshot) {
+                if(snapshot.val()) {
+                    vm.isLiked = true;
+                    console.log('il y a un putain de snapshot');
+                } else {
+                    vm.isLiked = false;
+                    console.log("snapshot vaut null");
+                }
+                console.log(snapshot.val());
+                console.log(vm.isLiked);
+            });
+        }
+
+        function like(venue) {
+            var userReference = FirebaseService.getAuthDatas();
+            console.log(userReference);
+            var userLikes = userReference.child('venues/' + venue.id);
+            FirebaseService.getAuthDatas().child('venues').child(venue.id).once('value', function(snapshot) {
+                if(snapshot.val()) {
+                    vm.isLiked = false;
+                    userLikes.remove();
+                } else {
+                    vm.isLiked = true;
+                    userLikes.set({
+                        name: venue.name
+                    });
+                }
+
+                console.log('je clique et c est:');
+                console.log(vm.isLiked);
+            });
+        }
+
+        function getLikers() {
+            var users = $firebaseArray(FirebaseService.getFirebaseReference().child('users'));
+            users.$loaded(function(result) {
+                angular.forEach(result, function(liker, key) {
+                    console.log(liker.$id);
+                    if(liker.venues) {
+                        angular.forEach(liker.venues, function(value, key) {
+                            if(key === venueId) {
+                                vm.likers.push({
+                                    id: liker.$id,
+                                    name: liker.name
+                                });
+                            } else {
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
         function getDays(days) {
             vm.venue.days = [];
+
             var jours = [];
             vm.venue.monday = 0;
             vm.venue.currendDay = null;
@@ -61,7 +126,7 @@ module.exports = function(app) {
                         horaire : days[vm.venue.monday + m].open[0].renderedTime
                     });
                     m++;
-                    
+
                 }else{
                    jours.push({
                         days : days[k].days,
@@ -78,9 +143,9 @@ module.exports = function(app) {
                 jours[j].days = jours[j].days.replace("sam.", "Samedi ");
                 jours[j].days = jours[j].days.replace("dim.", "Dimanche ");
                 jours[j].days = jours[j].days.replace("–", "- ");
-                
+
                 jours[j].horaire = jours[j].horaire.replace("–", " - ");
-                
+
                if(jours[j].horaire == 'Aucun')
                     jours[j].horaire = 'Fermé';
             }
