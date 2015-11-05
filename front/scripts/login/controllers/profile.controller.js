@@ -23,23 +23,11 @@ module.exports = function(app) {
         activate();
 
         function activate() {
-            // Check if auth
-            /*if(fbAuth) {
-                console.log(fbAuth);
-                fb.child('users/' + fbAuth.uid).on('value', function(snapshot) {
-                    console.log(snapshot.val());
-                    $scope.user = snapshot.val();
-                    console.log($scope.user);
-                });*/
-
-               //vm.userReference = $firebaseObject(fb.child('users/' + fbAuth.uid));
-
-            /*} else {
-                $state.go('app.home');
-            }*/
+            //Sert à rien pour l'instant ?
         }
+
         var takingPhoto = false;
-        $scope.takePhoto = function() {
+        $scope.takePhoto = function(typeSource) {
             document.addEventListener('deviceready', onDeviceReady, false);
             function onDeviceReady() {
                 if(takingPhoto) {
@@ -49,19 +37,27 @@ module.exports = function(app) {
                     takingPhoto = true;
                 }
 
-                var options = {
-                    quality: 50,
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    allowEdit: true,
-                    encodingType: Camera.EncodingType.JPEG,
-                    targetWidth: 100,
-                    targetHeight: 100,
-                    cameraDirection: 1,
-                    popoverOptions: CameraPopoverOptions,
-                    saveToPhotoAlbum: false,
-                    correctOrientation: true
-                };
+                if(typeSource == 'upload') {
+                    var options = {
+                        quality: 100,
+                        destinationType: Camera.DestinationType.DATA_URL,
+                        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                        encodingType: Camera.EncodingType.JPEG,
+                    };
+
+                }else {
+                    var options = {
+                        quality: 100,
+                        destinationType: Camera.DestinationType.DATA_URL,
+                        sourceType: Camera.PictureSourceType.CAMERA,
+                        encodingType: Camera.EncodingType.JPEG,
+                        //cameraDirection: 1,
+                        cameraDirection: Camera.Direction.BACK,
+                        popoverOptions: CameraPopoverOptions,
+                        saveToPhotoAlbum: false,
+                        correctOrientation: true
+                    };
+                }
 
                 $cordovaCamera.getPicture(options).then(function(imageData) {
                     var user = FirebaseService.getAuthDatas();
@@ -69,27 +65,8 @@ module.exports = function(app) {
                         'photo': imageData
                     });
                 }, function(err) {
-                    // error
+                    //alert('L\'opération semble être annulée');
                 });
-
-
-                /* navigator.camera.getPicture(onSuccess, onFail, {
-                    options
-                });
-                function onSuccess(imageData) {
-                    alert('onSuccess');
-                    var user = FirebaseService.getAuthDatas();
-                    user.update({
-                        'photo': imageData
-                    });
-                    console.log(user);
-                    //imageData
-                }
-
-                function onFail(message) {
-                    alert('Failed because: ' + message);
-                }
-                */
             }
         };
 
@@ -97,15 +74,6 @@ module.exports = function(app) {
             var test = fb.child('users/' + fbAuth.uid).on('value', function(snapshot) {
                 console.log(snapshot.val());
             });
-            /*vm.userReference.$add({
-                email: vm.userReference.email,
-                name: vm.userReference.name,
-                password: vm.userReference.password,
-                message: 'bonjour tout le monde',
-                test: 'coucou'
-            }, function() {
-                console.log('info ajotuée');
-            });*/
         }
         var id = 0;
 

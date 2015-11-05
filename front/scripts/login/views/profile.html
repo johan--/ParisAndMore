@@ -1,10 +1,14 @@
-<!-- <ion-view view-title="Bonjour {{ user.name }}"> -->
-    <ion-content view-title="Bonjour {{ user.name }}">
+<ion-view view-title="Bonjour {{ user.name }}">
+    <ion-content view-title="Bonjour {{ user.name }}" class="profile" >
+       	<div class="wrap-picture">
+        	<img ng-show="user.photo" ng-click="takePhoto('upload')" src="data:image/jpg;base64,{{user.photo}}" alt="{{ user.name }}" />
+       	</div>
         <h1>Profile</h1>
-        <button ng-click="takePhoto()">UPLOAD</button>
-        <button ng-click="profileCtrl.addInfo()">INFOS</button>
-        <input type="test" ng-model="user.name">
-        <p ng-model="user">{{ user.name }}</p>
+        <button ng-click="takePhoto()">photo</button>
+        <!--<button ng-click="profileCtrl.addInfo()">INFOS</button>-->
+        <input type="text" placeholder="user.name" ng-model="user.name">
+        <input type="text" placeholder="{{user.age ? user.age : 'Votre age'}}" ng-model="user.age">
+        <input type="text" placeholder="{{user.langue ? user.langue : 'Votre langue'}}" ng-model="user.langue">
         <textarea ng-model="user.description">Message: {{ user.description }}</textarea>
     </ion-content>
-<!-- </ion-view> -->
+</ion-view>

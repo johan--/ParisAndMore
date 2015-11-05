@@ -11,6 +11,7 @@
 @import "venues.scss"; 
 @import "venues-details.scss"; 
 @import "themes.scss"; 
+@import "profile.scss"; 
 
 .full-screen {
     position: fixed;
@@ -29,4 +30,12 @@
 .full-width,
 .full-width .fa-surface {
     width: 100%
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader){
+	height: 45px;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > *{
+	margin-top: 0;
 }
