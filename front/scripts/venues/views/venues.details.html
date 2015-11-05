@@ -5,7 +5,9 @@
                 <ion-content>
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
                     <div class="wrap">
-                         <h1>{{ venueCtrl.venue.name }}</h1>
+                         <h1>{{ venueCtrl.venue.name }}</h1><button ng-click="venueCtrl.like(venueCtrl.venue)">LIKE ME</button>
+                         <p>isLiked? {{ isLiked ? 'oui' : 'non' }}</p>
+                         <p ng-show="!venueCtrl.isLiked">TEST</p>
 
                         <ul class="rating">
                             <li ng-repeat="note in venueCtrl.venue.ratingTab track by $index">
@@ -32,7 +34,7 @@
                                 <td>Horaires</td>
                             </tr>
                             <tr ng-repeat="day in venueCtrl.venue.days">
-     
+
                                    <td ng-if="day.days == 'Aujourd\'hui'">
                                         <b>{{day.days}}</b>
                                     </td>
@@ -66,7 +68,7 @@
                                 <div class="md-list-item-text">
                                    <b>
                                        {{advice.user.firstName}}
-                                   </b> 
+                                   </b>
                                    <p class="advices">
                                         "{{advice.text}}"
                                     </p>

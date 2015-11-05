@@ -5,17 +5,19 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = [app.name + '.VenuesService', '$stateParams', '$ionicLoading'];
+    var deps = ['$scope', app.name + '.VenuesService', '$stateParams', '$ionicLoading', 'main.common.FirebaseService', '$firebaseObject'];
 
-    function controller(VenuesService, $stateParams, $ionicLoading) {
+    function controller($scope, VenuesService, $stateParams, $ionicLoading, FirebaseService, $firebaseObject) {
         var vm = this;
-        //console.log($stateParams);
         var venueId = $stateParams.venueId;
         vm.controllername = fullname;
         vm.getVenue = getVenue;
         vm.getRate = getRate;
         vm.getDays = getDays;
         vm.takePicture = takePicture;
+        vm.like = like;
+        vm.checkLike = checkLike;
+
         activate();
 
         function activate() {
@@ -23,6 +25,8 @@ module.exports = function(app) {
                 template: 'loading'
             });
             vm.getVenue();
+            vm.checkLike(venueId);
+
         }
 
         function getVenue() {
@@ -31,11 +35,45 @@ module.exports = function(app) {
             }).then(function(result) {
                 vm.venue = result.response.venue;
                 vm.venue.ratingTab = [];
-                console.log(vm.venues);
                 vm.getRate(vm.venue.rating);
                 vm.getDays(vm.venue.popular.timeframes);
                 $ionicLoading.hide();
 
+            });
+        }
+
+        function checkLike(venueId) {
+            var userReference = FirebaseService.getAuthDatas();
+            var userLikes = userReference.child('venues/' + venueId);
+            FirebaseService.getAuthDatas().child('venues').child(venueId).once('value', function(snapshot) {
+                if(snapshot.val()) {
+                    vm.isLiked = true;
+                    console.log('il y a un putain de snapshot');
+                } else {
+                    vm.isLiked = false;
+                    console.log("snapshot vaut null");
+                }
+                console.log(snapshot.val());
+                console.log(vm.isLiked);
+            });
+        }
+
+        function like(venue) {
+            var userReference = FirebaseService.getAuthDatas();
+            var userLikes = userReference.child('venues/' + venue.id);
+            FirebaseService.getAuthDatas().child('venues').child(venue.id).once('value', function(snapshot) {
+                if(snapshot.val()) {
+                    vm.isLiked = false;
+                    userLikes.remove();
+                } else {
+                    vm.isLiked = true;
+                    userLikes.set({
+                        name: venue.name
+                    });
+                }
+
+                console.log('je clique et c est:');
+                console.log(vm.isLiked);
             });
         }
 
@@ -47,7 +85,7 @@ module.exports = function(app) {
 
             //Parcer le tableau afin de récuper les objets qui contiennet 2 jour ex: 'lundi. -mar' et les séparer
             for(var i = 0; i < jours.length-1; i++ ){
-                
+
                 if(days[i].days && days[i].days.indexOf("–") > -1)
                     //Vérifier s'il y a un un objet qui contien 2 jours
                     twoDays = i;
@@ -77,10 +115,10 @@ module.exports = function(app) {
                 days[i].days = days[i].days;
                 days[i].horaire = days[i].open[0].renderedTime;
             }
-            
+
             //Parcer les heures d'ouvertures et les jours afin de synchroniser les deux sur la même ligne
             for(var j = 0; j < jours.length ; j++ ){
-                
+
                 if(k < jours.length - vm.venue.currentDay){
                     //Afficher les heures des jours AVANT le currentDay (aujourd'hui)
 
