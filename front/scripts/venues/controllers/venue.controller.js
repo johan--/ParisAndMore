@@ -88,7 +88,7 @@ module.exports = function(app) {
             users.$loaded(function(result) {
                 angular.forEach(result, function(liker, key) {
                     console.log(liker.$id);
-                    if(liker.venues) {
+                    if(liker.venues && liker.$id !== FirebaseService.getAuthUid()) {
                         angular.forEach(liker.venues, function(value, key) {
                             if(key === venueId) {
                                 vm.likers.push({
