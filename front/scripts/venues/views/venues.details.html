@@ -80,13 +80,14 @@
                 </ion-content>
             </ion-view>
         </ion-tab>
-        <ion-tab title="Settings" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
+        <ion-tab title="Settings" icon-on="ion-ios-person" icon-off="ion-ios-person-outline">
             <ion-view>
                 <ion-content>
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
                     <md-list>
                         <md-list-item ng-repeat="liker in venueCtrl.likers">
                             {{ liker.name }}
+                            <button ng-click="venueCtrl.createRoom(liker)">Chatter</button>
                         </md-list-item>
                 </ion-content>
             </ion-view>

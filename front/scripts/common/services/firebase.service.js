@@ -14,7 +14,7 @@ module.exports = function(app) {
             getFirebaseReference: getFirebaseReference,
             getAuthUid: getAuthUid,
             getAuthDatas: getAuthDatas,
-            getUsers: getUsers
+            getUser: getUser
         };
 
         return new Service();
@@ -31,9 +31,8 @@ module.exports = function(app) {
             return firebaseReference.child('users/' + firebaseReference.getAuth().uid);
         }
 
-        function getUsers(params) {
-            console.log(FirebaseFactory.getUsers());
-            FirebaseFactory.getUsers(params).$promise;
+        function getUser(uid) {
+            return firebaseReference.child('users/' + uid);
         }
 
     }
