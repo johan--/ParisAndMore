@@ -87,6 +87,7 @@
                     <md-list>
                         <md-list-item ng-repeat="liker in venueCtrl.likers">
                             {{ liker.name }}
+                            <button ng-click="venueCtrl.createRoom(liker)">Chatter</button>
                         </md-list-item>
                 </ion-content>
             </ion-view>

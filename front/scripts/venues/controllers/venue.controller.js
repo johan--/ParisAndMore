@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', app.name + '.VenuesService', '$stateParams', '$ionicLoading', 'main.common.FirebaseService', '$firebaseObject', '$firebaseArray'];
+    var deps = ['$scope', app.name + '.VenuesService', '$stateParams', '$ionicLoading', 'main.common.FirebaseService', '$firebaseObject', '$firebaseArray', '$state'];
 
-    function controller($scope, VenuesService, $stateParams, $ionicLoading, FirebaseService, $firebaseObject, $firebaseArray) {
+    function controller($scope, VenuesService, $stateParams, $ionicLoading, FirebaseService, $firebaseObject, $firebaseArray, $state) {
         var vm = this;
         var venueId = $stateParams.venueId;
         vm.controllername = fullname;
@@ -20,6 +20,7 @@ module.exports = function(app) {
         vm.checkLike = checkLike;
         vm.getLikers = getLikers;
         vm.likers = [];
+        vm.createRoom = createRoom;
 
         activate();
 
@@ -99,6 +100,27 @@ module.exports = function(app) {
                         });
                     }
                 });
+            });
+        }
+
+        function createRoom(liker) {
+            var user = $firebaseObject(FirebaseService.getAuthDatas());
+            var rooms = $firebaseArray(FirebaseService.getFirebaseReference().child('rooms'));
+            var userRooms = $firebaseArray(FirebaseService.getAuthDatas().child('rooms'));
+            var partnerRooms = $firebaseArray(FirebaseService.getUser(liker.id).child('rooms'));
+            rooms.$add({
+                date: new Date().getTime()
+            }).then(function(ref) {
+                userRooms.$add({
+                    id: ref.name(),
+                    partnerName: liker.name
+                });
+                partnerRooms.$add({
+                    id: ref.name(),
+                    partnerName: user.name
+                });
+                $state.go('app.room', { roomId: ref.name()});
+
             });
         }
 
