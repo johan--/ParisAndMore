@@ -5,18 +5,21 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', app.name + '.VenuesService', '$stateParams', '$ionicLoading', 'main.common.FirebaseService', '$firebaseObject'];
+    var deps = ['$scope', app.name + '.VenuesService', '$stateParams', '$ionicLoading', 'main.common.FirebaseService', '$firebaseObject', '$firebaseArray'];
 
-    function controller($scope, VenuesService, $stateParams, $ionicLoading, FirebaseService, $firebaseObject) {
+    function controller($scope, VenuesService, $stateParams, $ionicLoading, FirebaseService, $firebaseObject, $firebaseArray) {
         var vm = this;
         var venueId = $stateParams.venueId;
         vm.controllername = fullname;
+        console.log(vm.controllername);
         vm.getVenue = getVenue;
         vm.getRate = getRate;
         vm.getDays = getDays;
         vm.takePicture = takePicture;
         vm.like = like;
         vm.checkLike = checkLike;
+        vm.getLikers = getLikers;
+        vm.likers = [];
 
         activate();
 
@@ -26,6 +29,7 @@ module.exports = function(app) {
             });
             vm.getVenue();
             vm.checkLike(venueId);
+            vm.getLikers();
 
         }
 
@@ -60,6 +64,7 @@ module.exports = function(app) {
 
         function like(venue) {
             var userReference = FirebaseService.getAuthDatas();
+            console.log(userReference);
             var userLikes = userReference.child('venues/' + venue.id);
             FirebaseService.getAuthDatas().child('venues').child(venue.id).once('value', function(snapshot) {
                 if(snapshot.val()) {
@@ -74,6 +79,26 @@ module.exports = function(app) {
 
                 console.log('je clique et c est:');
                 console.log(vm.isLiked);
+            });
+        }
+
+        function getLikers() {
+            var users = $firebaseArray(FirebaseService.getFirebaseReference().child('users'));
+            users.$loaded(function(result) {
+                angular.forEach(result, function(liker, key) {
+                    console.log(liker.$id);
+                    if(liker.venues) {
+                        angular.forEach(liker.venues, function(value, key) {
+                            if(key === venueId) {
+                                vm.likers.push({
+                                    id: liker.$id,
+                                    name: liker.name
+                                });
+                            } else {
+                            }
+                        });
+                    }
+                });
             });
         }
 

@@ -13,7 +13,8 @@ module.exports = function(app) {
         Service.prototype = {
             getFirebaseReference: getFirebaseReference,
             getAuthUid: getAuthUid,
-            getAuthDatas: getAuthDatas
+            getAuthDatas: getAuthDatas,
+            getUsers: getUsers
         };
 
         return new Service();
@@ -28,6 +29,11 @@ module.exports = function(app) {
 
         function getAuthDatas() {
             return firebaseReference.child('users/' + firebaseReference.getAuth().uid);
+        }
+
+        function getUsers(params) {
+            console.log(FirebaseFactory.getUsers());
+            FirebaseFactory.getUsers(params).$promise;
         }
 
     }

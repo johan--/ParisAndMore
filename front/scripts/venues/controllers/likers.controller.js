@@ -10,6 +10,7 @@ module.exports = function(app) {
     function controller() {
         var vm = this;
         vm.controllername = fullname;
+        console.log(vm.controllername);
 
         var activate = function() {
 
