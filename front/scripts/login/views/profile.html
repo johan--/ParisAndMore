@@ -1,5 +1,5 @@
-<ion-view view-title="Bonjour {{ user.name }}">
-    <ion-content>
+<!-- <ion-view view-title="Bonjour {{ user.name }}"> -->
+    <ion-content view-title="Bonjour {{ user.name }}">
         <h1>Profile</h1>
         <button ng-click="takePhoto()">UPLOAD</button>
         <button ng-click="profileCtrl.addInfo()">INFOS</button>
@@ -7,4 +7,4 @@
         <p ng-model="user">{{ user.name }}</p>
         <textarea ng-model="user.description">Message: {{ user.description }}</textarea>
     </ion-content>
-</ion-view>
+<!-- </ion-view> -->

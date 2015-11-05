@@ -171,21 +171,6 @@ module.exports = function(app) {
             }
             vm.venue.jour = jours;
         }
-
-        function takePicture() {
-            console.log('ok');
-          navigator.camera.getPicture(function(imageURI) {
-
-            // imageURI is the URL of the image that we can use for
-            // an <img> element or backgroundImage.
-
-          }, function(err) {
-
-            // Ruh-roh, something bad happened
-
-          });
-        }
-
         function getRate(rating){
             vm.venue.rating = Math.round(rating/2);
             for(var i = 0; i < vm.venue.rating; i++){
