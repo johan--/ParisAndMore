@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = [app.name + '.VenuesService', '$ionicLoading'];
+    var deps = ['$scope', app.name + '.VenuesService', '$ionicLoading'];
 
-    function controller(VenuesService, $ionicLoading) {
+    function controller($scope, VenuesService, $ionicLoading) {
         var vm = this;
         vm.controllername = fullname;
 
@@ -22,6 +22,9 @@ module.exports = function(app) {
             });
             vm.getVenues();
             vm.initMap();
+            $scope.$on('leafletDirectiveMarker.click', function(e, args) {
+                $scope.markerVenueId = args.model.venueId;
+            });
         }
 
         function getVenues() {
@@ -36,8 +39,11 @@ module.exports = function(app) {
                 vm.markers = [];
                 for(var i = 0; i < length; i++) {
                     vm.markers.push({
+                        venueId: vm.venues[i].id,
                         lat: vm.venues[i].location.lat,
-                        lng: vm.venues[i].location.lng
+                        lng: vm.venues[i].location.lng,
+                        getMessageScope: function() { return $scope; },
+                        message: '<div><h2>' + vm.venues[i].name + '</h2><button ui-sref="app.venue({venueId:markerVenueId})">Voir</button></div>'
                     });
                 }
                 $ionicLoading.hide();
