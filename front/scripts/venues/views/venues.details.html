@@ -58,21 +58,7 @@
             <ion-view>
                 <ion-content>
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
-                    <div class="wrap" >
-                        <h3>Commentaires</h3>
-                        <md-list>
-                            <md-list-item class="md-3-line" ng-repeat="advice in venueCtrl.venue.tips.groups[0].items">
-                                <div class="md-list-item-text">
-                                   <b>
-                                       {{advice.user.firstName}}
-                                   </b>
-                                   <p class="advices">
-                                        "{{advice.text}}"
-                                    </p>
-                                </div>
-                            </md-list-item>
-                        </md-list>
-                    </div>
+                    <leaflet width="100%" height="400px"></leaflet>
                 </ion-content>
             </ion-view>
         </ion-tab>

@@ -12,12 +12,20 @@ require('angular-sanitize');
 require('angular-moment');
 require('moment/locale/fr');
 require('angular-material-icons');
+require('leaflet');
+require('angular-leaflet-directive');
 require('firebase');
 require('angularfire');
 require('ionic');
 require('ionic-angular');
 require('angular-material');
-var app = angular.module(namespace, ['ionic', 'ngMaterial', 'firebase', 'ngMdIcons', 'angularMoment',
+var app = angular.module(namespace, [
+    'ionic',
+    'ngMaterial',
+    'firebase',
+    'ngMdIcons',
+    'angularMoment',
+    'leaflet-directive',
     // inject:modules start
     require('./common')(namespace).name,
     require('./login')(namespace).name,
@@ -91,6 +99,15 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
                 'menuContent': {
                     template: require('./login/views/profile.html'),
                     controller: 'main.login.profile as profileCtrl'
+                }
+            }
+        })
+        .state('app.profiles', {
+            url: '/profile/:userId',
+            views: {
+                'menuContent': {
+                    template: require('./login/views/profiles.html'),
+                    controller: 'main.login.profiles as profilesCtrl'
                 }
             }
         })
