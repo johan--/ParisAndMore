@@ -43,6 +43,7 @@ module.exports = function(app) {
                         destinationType: Camera.DestinationType.DATA_URL,
                         sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                         encodingType: Camera.EncodingType.JPEG,
+                        argetHeight: 400,
                     };
 
                 }else {
@@ -51,9 +52,9 @@ module.exports = function(app) {
                         destinationType: Camera.DestinationType.DATA_URL,
                         sourceType: Camera.PictureSourceType.CAMERA,
                         encodingType: Camera.EncodingType.JPEG,
-                        //cameraDirection: 1,
                         cameraDirection: Camera.Direction.BACK,
                         popoverOptions: CameraPopoverOptions,
+                        targetHeight: 400,
                         saveToPhotoAlbum: false,
                         correctOrientation: true
                     };
