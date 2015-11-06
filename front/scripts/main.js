@@ -151,8 +151,26 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
             url: '/venues/:venueId',
             views: {
                 'menuContent': {
-                    template: require('./venues/views/venues.details.html'),
+                    template: require('./venues/views/venue.html'),
                     controller: 'main.venues.venue as venueCtrl'
+                }
+            }
+        })
+        .state('app.aroundThemes', {
+            url: '/aroundThemes',
+            views: {
+                'menuContent': {
+                    template: require('./venues/views/around-themes.html'),
+                    controller: 'main.venues.themes as themesCtrl'
+                }
+            }
+        })
+        .state('app.aroundVenues', {
+            url: '/aroundVenues',
+            views: {
+                'menuContent': {
+                    template: require('./venues/views/around-venues.html'),
+                    controller: 'main.venues.aroundVenues as aroundVenuesCtrl'
                 }
             }
         });
