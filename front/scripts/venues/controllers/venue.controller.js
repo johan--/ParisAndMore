@@ -198,6 +198,11 @@ module.exports = function(app) {
                     }
                 }
             };
+            vm.markers = [];
+            vm.markers.push({
+                lat: location.lat,
+                lng: location.lng
+            });
         }
 
     }

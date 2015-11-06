@@ -57,8 +57,7 @@
         <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
             <ion-view>
                 <ion-content>
-                    <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
-                    <leaflet center="venueCtrl.center" layers="venueCtrl.layers" width="100%" height="400px"></leaflet>
+                    <leaflet center="venueCtrl.center" layers="venueCtrl.layers" markers="venueCtrl.markers" width="100%" height="500px"></leaflet>
                 </ion-content>
             </ion-view>
         </ion-tab>
