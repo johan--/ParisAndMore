@@ -58,7 +58,7 @@
             <ion-view>
                 <ion-content>
                     <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
-                    <leaflet width="100%" height="400px"></leaflet>
+                    <leaflet center="venueCtrl.center" layers="venueCtrl.layers" width="100%" height="400px"></leaflet>
                 </ion-content>
             </ion-view>
         </ion-tab>

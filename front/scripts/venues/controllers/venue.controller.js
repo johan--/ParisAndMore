@@ -19,6 +19,7 @@ module.exports = function(app) {
         vm.getLikers = getLikers;
         vm.likers = [];
         vm.createRoom = createRoom;
+        vm.initMap = initMap;
 
         activate();
 
@@ -29,7 +30,6 @@ module.exports = function(app) {
             vm.getVenue();
             vm.checkLike(venueId);
             vm.getLikers();
-
         }
 
         function getVenue() {
@@ -38,6 +38,7 @@ module.exports = function(app) {
             }).then(function(result) {
                 vm.venue = result.response.venue;
                 vm.venue.ratingTab = [];
+                vm.initMap(vm.venue.location);
                 vm.getRate(vm.venue.rating);
                 vm.getDays(vm.venue.popular.timeframes);
                 $ionicLoading.hide();
@@ -175,6 +176,28 @@ module.exports = function(app) {
             for(var i = 0; i < vm.venue.rating; i++){
                  vm.venue.ratingTab.push(true);
             }
+        }
+
+        function initMap(location) {
+            vm.center = {
+                lat: location.lat,
+                lng: location.lng,
+                zoom: 16
+            };
+
+            vm.layers = {
+                baselayers: {
+                    mapbox_terrain: {
+                        name: 'Mapbox Terrain',
+                        url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+                        type: 'xyz',
+                        layerOptions: {
+                            apikey: 'pk.eyJ1IjoiZ2VvZmZyZXlwbCIsImEiOiJjaWducG90ZDUwMDNqbHVrdDZtM2xmNGs0In0.KeeItsK30xU8aEOAcFBpGw',
+                            mapid: 'geoffreypl.o3do1117'
+                        }
+                    }
+                }
+            };
         }
 
     }
