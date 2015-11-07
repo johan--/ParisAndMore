@@ -44,11 +44,9 @@ module.exports = function(app) {
             $cordovaGeolocation
                 .getCurrentPosition(posOptions)
                     .then(function(position) {
-                        var lat = position.coords.latitude;
-                        var lng = position.coords.longitude;
-                        vm.center.lat = lat;
-                        vm.center.lng = lng;
-                        vm.getVenues(lat, lng);
+                        vm.center.lat = position.coords.latitude;
+                        vm.center.lng = position.coords.longitude;
+                        vm.getVenues(vm.center.lat, vm.center.lng);
                     }, function(err) {
                         $cordovaToast
                             .show(err, 'short', 'center')
