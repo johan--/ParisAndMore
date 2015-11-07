@@ -12,6 +12,7 @@ module.exports = function(app) {
 
         vm.getThemes = getThemes;
         vm.setVenuesCats = setVenuesCats;
+        vm.setThemeObject = setThemeObject;
         activate();
 
         function activate() {
@@ -20,6 +21,10 @@ module.exports = function(app) {
 
         function setVenuesCats(categories) {
             VenuesService.setVenuesCats(categories.theme.categories);
+        }
+
+        function setThemeObject(categories) {
+            VenuesService.setSelectedTheme(categories);
         }
 
         function getThemes() {

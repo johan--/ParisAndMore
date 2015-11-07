@@ -9,15 +9,19 @@ module.exports = function(app) {
 
         var venuesCategories = '';
         var venueId = '';
+        var selectedTheme = {};
 
         function Service() {}
 
         Service.prototype = {
             getThemes: getThemes,
             getVenues: getVenues,
+            getAroundVenues: getAroundVenues,
             getVenue: getVenue,
             setVenuesCats: setVenuesCats,
-            getVenuesCats: getVenuesCats
+            getVenuesCats: getVenuesCats,
+            getSelectedTheme: getSelectedTheme,
+            setSelectedTheme: setSelectedTheme
         };
 
         return new Service();
@@ -66,6 +70,10 @@ module.exports = function(app) {
             return VenuesFactory.getVenues(params).$promise;
         }
 
+        function getAroundVenues(params) {
+            return VenuesFactory.getAroundVenues(params).$promise;
+        }
+
         function getVenue(params) {
             return VenuesFactory.getVenue(params).$promise;
         }
@@ -76,6 +84,14 @@ module.exports = function(app) {
 
         function getVenuesCats() {
             return venuesCategories;
+        }
+
+        function getSelectedTheme() {
+            return selectedTheme;
+        }
+
+        function setSelectedTheme(theme) {
+            selectedTheme = theme;
         }
 
     }

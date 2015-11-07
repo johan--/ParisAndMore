@@ -6,9 +6,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', app.name + '.VenuesService', '$ionicLoading'];
+    var deps = ['$scope', app.name + '.VenuesService', '$ionicLoading', 'main.common.MAPBOX'];
 
-    function controller($scope, VenuesService, $ionicLoading) {
+    function controller($scope, VenuesService, $ionicLoading, MAPBOX) {
         var vm = this;
         vm.controllername = fullname;
 
@@ -25,11 +25,17 @@ module.exports = function(app) {
             vm.getVenues();
             vm.initMap();
             $scope.$on('leafletDirectiveMarker.click', function(e, args) {
-                console.log(args);
+                var themeObject = VenuesService.getSelectedTheme();
                 VenuesService.getVenue({
                     venueId: args.model.venueId
                 }).then(function(result) {
-                    $scope.markerImage = result.response.venue.bestPhoto.suffix;
+                    console.log(result);
+                    if(result.response.venue.bestPhoto) {
+                        $scope.markerImage = 'https://irs0.4sqi.net/img/general/200x100' + result.response.venue.bestPhoto.suffix;
+                    } else {
+                        console.log(themeObject);
+                        $scope.markerImage = themeObject.theme.image;
+                    }
                     $scope.markerName = result.response.venue.name;
                     $scope.markerDescription = result.response.venue.description;
                 });
@@ -40,8 +46,9 @@ module.exports = function(app) {
         function getVenues() {
             var categories = VenuesService.getVenuesCats();
 
-            VenuesService.getVenues({
-                categoryId: categories
+            VenuesService.getAroundVenues({
+                categoryId: categories,
+                latlng: '48.8635646,2.3526385999999775'
             }).then(function(result) {
                 vm.venues = result.response.venues;
                 var length = vm.venues.length;
@@ -71,11 +78,11 @@ module.exports = function(app) {
                 baselayers: {
                     mapbox_terrain: {
                         name: 'Mapbox Terrain',
-                        url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
-                        type: 'xyz',
+                        url: MAPBOX.URL,
+                        type: MAPBOX.TYPE,
                         layerOptions: {
-                            apikey: 'pk.eyJ1IjoiZ2VvZmZyZXlwbCIsImEiOiJjaWducG90ZDUwMDNqbHVrdDZtM2xmNGs0In0.KeeItsK30xU8aEOAcFBpGw',
-                            mapid: 'geoffreypl.o3do1117'
+                            apikey: MAPBOX.API_KEY,
+                            mapid: MAPBOX.MAP_ID
                         }
                     }
                 }
