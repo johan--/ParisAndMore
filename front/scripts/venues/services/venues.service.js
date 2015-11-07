@@ -9,15 +9,19 @@ module.exports = function(app) {
 
         var venuesCategories = '';
         var venueId = '';
+        var selectedTheme = {};
 
         function Service() {}
 
         Service.prototype = {
             getThemes: getThemes,
             getVenues: getVenues,
+            getAroundVenues: getAroundVenues,
             getVenue: getVenue,
             setVenuesCats: setVenuesCats,
-            getVenuesCats: getVenuesCats
+            getVenuesCats: getVenuesCats,
+            getSelectedTheme: getSelectedTheme,
+            setSelectedTheme: setSelectedTheme
         };
 
         return new Service();
@@ -52,7 +56,6 @@ module.exports = function(app) {
                     name: 'Divertissement',
                     image: './images/app/themes/divertissement.png'
                 }
-                
             ];
 
             return themes;
@@ -60,6 +63,10 @@ module.exports = function(app) {
 
         function getVenues(params) {
             return VenuesFactory.getVenues(params).$promise;
+        }
+
+        function getAroundVenues(params) {
+            return VenuesFactory.getAroundVenues(params).$promise;
         }
 
         function getVenue(params) {
@@ -72,6 +79,14 @@ module.exports = function(app) {
 
         function getVenuesCats() {
             return venuesCategories;
+        }
+
+        function getSelectedTheme() {
+            return selectedTheme;
+        }
+
+        function setSelectedTheme(theme) {
+            selectedTheme = theme;
         }
 
     }

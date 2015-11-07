@@ -2,7 +2,7 @@
   <ion-content class="themes">
     <ion-list>
       <!--<ion-item md-ink-ripple ng-repeat="theme in themesCtrl.themes" ng-click="themesCtrl.goToVenues(this.$parent)">-->
-      <ion-item md-ink-ripple ng-repeat="theme in themesCtrl.themes" ui-sref="app.aroundVenues" ng-click="themesCtrl.setVenuesCats(this.$parent)" class="content-theme">
+      <ion-item md-ink-ripple ng-repeat="theme in themesCtrl.themes" ui-sref="app.aroundVenues" ng-click="themesCtrl.setVenuesCats(this.$parent); themesCtrl.setThemeObject(this.$parent)" class="content-theme">
         <span>
             {{ theme.name }}
         </span>
