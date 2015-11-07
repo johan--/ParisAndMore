@@ -2,9 +2,10 @@
 @import "../../node_modules/font-awesome/scss/font-awesome.scss";
 
 
-@import "../../bower_components/famous-angular/dist/famous-angular";  
+@import "../../bower_components/famous-angular/dist/famous-angular";
 @import "../../node_modules/angular-material/angular-material";
 
+@import "lib/leaflet.scss";
 @import "generics.scss"; 
 @import "home.scss"; 
 @import "subscription.scss"; 
@@ -13,6 +14,7 @@
 @import "themes.scss"; 
 @import "profile.scss"; 
 @import "room.scss"; 
+
 
 .full-screen {
     position: fixed;

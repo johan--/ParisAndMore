@@ -7,7 +7,6 @@ require('angular-animate');
 require('ionic');
 require('ionic-angular');
 require('angular-material');
-require('famous-angular');
 require('ng-cordova');
 
 var modulename = 'venues';

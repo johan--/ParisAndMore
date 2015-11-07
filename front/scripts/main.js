@@ -12,12 +12,20 @@ require('angular-sanitize');
 require('angular-moment');
 require('moment/locale/fr');
 require('angular-material-icons');
+require('leaflet');
+require('angular-leaflet-directive');
 require('firebase');
 require('angularfire');
 require('ionic');
 require('ionic-angular');
 require('angular-material');
-var app = angular.module(namespace, ['ionic', 'ngMaterial', 'firebase', 'ngMdIcons', 'angularMoment',
+var app = angular.module(namespace, [
+    'ionic',
+    'ngMaterial',
+    'firebase',
+    'ngMdIcons',
+    'angularMoment',
+    'leaflet-directive',
     // inject:modules start
     require('./common')(namespace).name,
     require('./login')(namespace).name,
@@ -94,6 +102,15 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
                 }
             }
         })
+        .state('app.profiles', {
+            url: '/profile/:userId',
+            views: {
+                'menuContent': {
+                    template: require('./login/views/profiles.html'),
+                    controller: 'main.login.profiles as profilesCtrl'
+                }
+            }
+        })
         .state('app.rooms', {
             url: '/rooms',
             views: {
@@ -134,8 +151,26 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
             url: '/venues/:venueId',
             views: {
                 'menuContent': {
-                    template: require('./venues/views/venues.details.html'),
+                    template: require('./venues/views/venue.html'),
                     controller: 'main.venues.venue as venueCtrl'
+                }
+            }
+        })
+        .state('app.aroundThemes', {
+            url: '/aroundThemes',
+            views: {
+                'menuContent': {
+                    template: require('./venues/views/around-themes.html'),
+                    controller: 'main.venues.themes as themesCtrl'
+                }
+            }
+        })
+        .state('app.aroundVenues', {
+            url: '/aroundVenues',
+            views: {
+                'menuContent': {
+                    template: require('./venues/views/around-venues.html'),
+                    controller: 'main.venues.aroundVenues as aroundVenuesCtrl'
                 }
             }
         });

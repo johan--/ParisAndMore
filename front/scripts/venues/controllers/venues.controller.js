@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = [app.name + '.VenuesService', '$stateParams', '$ionicLoading'];
+    var deps = [app.name + '.VenuesService', '$ionicLoading'];
 
-    function controller(VenuesService, $stateParams, $ionicLoading) {
+    function controller(VenuesService, $ionicLoading) {
         var vm = this;
         vm.controllername = fullname;
 
