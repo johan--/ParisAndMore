@@ -6,15 +6,30 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', app.name + '.VenuesService', '$ionicLoading', 'main.common.MAPBOX'];
+    var deps = ['$scope', app.name + '.VenuesService', '$ionicLoading', 'main.common.MAPBOX', '$cordovaGeolocation', '$cordovaToast', '$state'];
 
-    function controller($scope, VenuesService, $ionicLoading, MAPBOX) {
+    function controller($scope, VenuesService, $ionicLoading, MAPBOX, $cordovaGeolocation, $cordovaToast, $state) {
         var vm = this;
         vm.controllername = fullname;
-
         vm.getVenues = getVenues;
         vm.initMap = initMap;
         $scope.venue  = '';
+        $scope.$on('leafletDirectiveMarker.click', function(e, args) {
+            var themeObject = VenuesService.getSelectedTheme();
+            VenuesService.getVenue({
+                venueId: args.model.venueId
+            }).then(function(result) {
+                if(result.response.venue.bestPhoto) {
+                    $scope.markerImage = 'https://irs0.4sqi.net/img/general/200x100' + result.response.venue.bestPhoto.suffix;
+                } else {
+                    console.log(themeObject);
+                    $scope.markerImage = themeObject.theme.image;
+                }
+                $scope.markerName = result.response.venue.name;
+                $scope.markerDescription = result.response.venue.description;
+            });
+            $scope.markerVenueId = args.model.venueId;
+        });
 
         activate();
 
@@ -22,33 +37,31 @@ module.exports = function(app) {
             $ionicLoading.show({
                 template: 'loading'
             });
-            vm.getVenues();
+
             vm.initMap();
-            $scope.$on('leafletDirectiveMarker.click', function(e, args) {
-                var themeObject = VenuesService.getSelectedTheme();
-                VenuesService.getVenue({
-                    venueId: args.model.venueId
-                }).then(function(result) {
-                    console.log(result);
-                    if(result.response.venue.bestPhoto) {
-                        $scope.markerImage = 'https://irs0.4sqi.net/img/general/200x100' + result.response.venue.bestPhoto.suffix;
-                    } else {
-                        console.log(themeObject);
-                        $scope.markerImage = themeObject.theme.image;
-                    }
-                    $scope.markerName = result.response.venue.name;
-                    $scope.markerDescription = result.response.venue.description;
-                });
-                $scope.markerVenueId = args.model.venueId;
-            });
+            var posOptions = {timeout: 10000, enableHighAccuracy: false};
+            $cordovaGeolocation
+                .getCurrentPosition(posOptions)
+                    .then(function(position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        vm.getVenues(lat, lng);
+                    }, function(err) {
+                        $cordovaToast
+                            .show(err, 'short', 'center')
+                            .then(function(success) {
+                                $state.go('app.home');
+                            }, function(error) {
+                            });
+                    });
         }
 
-        function getVenues() {
+        function getVenues(lat, lng) {
             var categories = VenuesService.getVenuesCats();
 
             VenuesService.getAroundVenues({
                 categoryId: categories,
-                latlng: '48.8635646,2.3526385999999775'
+                latlng: lat + ',' + lng
             }).then(function(result) {
                 vm.venues = result.response.venues;
                 var length = vm.venues.length;
