@@ -1,12 +1,15 @@
 <ion-view view-title="{{ venueCtrl.venue.name }}" cache-view="false" class="venues-details">
     <ion-tabs class="tabs-positive tabs-icon-only">
-        <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+        <ion-tab title="Home" icon-on="ion-ios-information" icon-off="ion-ios-information-outline">
             <ion-view>
                 <ion-content>
-                    <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
-                    <span style="font-size:40px; color:red; cursor:pointer; position:relative; right:50px; bottom: 10px" ng-class="venueCtrl.isLiked ? 'ion-ios-heart' : 'ion-ios-heart-outline'" ng-click="venueCtrl.like(venueCtrl.venue)"></span>
+                    <div class="wrap-header">
+                        <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
+                    </div>
+                    
                     <div class="wrap">
                         <h1>{{ venueCtrl.venue.name }}</h1>
+                        <span ng-class="venueCtrl.isLiked ? 'ion-ios-heart' : 'ion-ios-heart-outline'" ng-click="venueCtrl.like(venueCtrl.venue)"></span>
 
                         <ul class="rating">
                             <li ng-repeat="note in venueCtrl.venue.ratingTab track by $index">
@@ -54,7 +57,7 @@
                 </ion-content>
             </ion-view>
         </ion-tab>
-        <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+        <ion-tab title="About" icon-on="ion-ios-location" icon-off="ion-ios-location-outline">
             <ion-view>
                 <ion-content>
                     <leaflet center="venueCtrl.center" layers="venueCtrl.layers" markers="venueCtrl.markers" width="100%" height="500px"></leaflet>
@@ -64,12 +67,24 @@
         <ion-tab title="Settings" icon-on="ion-ios-people" icon-off="ion-ios-people-outline">
             <ion-view>
                 <ion-content>
-                    <img ng-src="https://irs0.4sqi.net/img/general/400x200{{ venueCtrl.venue.bestPhoto.suffix }}" alt="{{ venueCtrl.venue.name }}">
-                    <md-list>
-                        <md-list-item ng-repeat="liker in venueCtrl.likers">
-                            {{ liker.name }}
-                            <button ng-click="venueCtrl.createRoom(liker)">Chatter</button>
+                    <div class="wrap-users">
+                        <h3>Ils aiment ce lieu</h3> 
+                        <md-list-item ng-repeat="liker in venueCtrl.likers" class="wrap-list" >
+                            <div class="wrap-image">
+                                <a ng-href="./profile/{{liker.id}}" >
+                                    <img ng-src="{{liker.photo}}" alt="{{liker.name}}" />
+                                </a>
+                            </div>
+                            <div  layout="column" class="wrap-text">
+                              <span>{{ liker.name }}, {{ liker.age}} {{ liker.age ? 'ans' : ''}} 
+                                <a ng-href="./profile/{{liker.id}}" >
+                                      Voir son profil
+                                  </a>
+                                </span> 
+                              <!--<p class="wrap-desc">"<span>{{ liker.description }}</span>"</p>-->
+                            </div>
                         </md-list-item>
+                    </div>
                 </ion-content>
             </ion-view>
         </ion-tab>

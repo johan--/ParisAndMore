@@ -1,0 +1,82 @@
+.room{
+	.wrap-messages{
+		padding-bottom: 60px;
+		background: #F7F7F7;
+	}
+	padding-bottom: 50px;
+	form{
+		width: 100%;
+		position: fixed;
+		bottom: 0;
+		border-top: 1px solid #C5C5C5;
+		border-bottom: 1px solid #C5C5C5;
+		background: #ffffff;
+		input[type="submit"]{
+			display: none;
+		}
+		input[type="text"]{
+			width: calc(100% - 60px);
+			display: inline-block;
+			padding-left: 10px
+		}
+		label{
+			display: inline-table;
+			vertical-align: middle;
+			height: 23px;
+			width: 23px;
+		}
+		.btn-send{
+			position: relative;
+			fill: $main-color;
+			svg{
+				position: absolute;
+			}
+		}
+	}
+	.wrap-text{
+		max-width: calc(100% - 55px);
+	}
+	.wrap-image{
+		width: 45px;
+		height: 45px;
+		position: relative;
+		overflow: hidden;
+		border-radius: 10%;
+		margin-right: 10px;
+		img{
+			position: absolute;
+			width: 100%;
+		}
+	}
+	.wrap-message{
+		position: relative;
+		padding: 0 10px;
+		left: 20px;
+    	transition: all 1s ease-in;
+		opacity: 0;
+		position: relative;
+		margin: 10px 0;
+		&.active{
+			left: 0;
+			opacity: 1;
+		}
+		p{
+			background: #FFFFFF;
+			border: 1px solid #C5C5C5;
+			padding: 5px;
+			margin: 0;
+			border-radius: 5px;
+		}
+		.time-ago{
+			position: absolute;
+			right: 12px;
+			bottom: -27px;
+			display:none;
+		}
+		&:last-child{
+			.time-ago{
+				display:block;
+			}
+		}
+	}
+}

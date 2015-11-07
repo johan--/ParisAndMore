@@ -6,14 +6,15 @@
 @import "../../node_modules/angular-material/angular-material";
 
 @import "lib/leaflet.scss";
+@import "generics.scss"; 
+@import "home.scss"; 
+@import "subscription.scss"; 
+@import "venues.scss"; 
+@import "venues-details.scss"; 
+@import "themes.scss"; 
+@import "profile.scss"; 
+@import "room.scss"; 
 
-@import "generics.scss";
-@import "home.scss";
-@import "subscription.scss";
-@import "venues.scss";
-@import "venues-details.scss";
-@import "themes.scss";
-@import "profile.scss";
 
 .full-screen {
     position: fixed;

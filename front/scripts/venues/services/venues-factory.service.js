@@ -16,6 +16,7 @@ module.exports = function(app) {
                     v: Foursquare.V,
                     sw: Foursquare.SW,
                     ne: Foursquare.NE,
+                    locale: Foursquare.LOCALE,
                     intent: Foursquare.INTENT_BROWSE
                 }
             },
@@ -25,6 +26,7 @@ module.exports = function(app) {
                 params: {
                     client_id: Foursquare.CLIENT_ID,
                     client_secret: Foursquare.CLIENT_SECRET,
+                    locale: Foursquare.LOCALE,
                     v: Foursquare.V
                 }
             },

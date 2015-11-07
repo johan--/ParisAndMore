@@ -12,7 +12,8 @@ module.exports = function(app) {
         INTENT_BROWSE: 'browse',
         INTENT_CHECKIN: 'checkin',
         LAT_LNG: 'll',
-        RADIUS: 'radius'
+        RADIUS: 'radius',
+        LOCALE: 'fr'
     };
     app.constant(app.name + '.' + constantname, args);
 };
