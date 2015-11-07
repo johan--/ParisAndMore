@@ -1,13 +1,19 @@
 .venues{
 	.content-building{
 		display: table;
+		width: calc(100% + 40px);
 		img{
 			vertical-align: middle;
     		margin: 0 10px;
 		}
 		span{
-			display: inline-table;
-    		vertical-align: middle;
+			display: inline-block;
+		    vertical-align: middle;
+		    text-overflow: ellipsis;
+		    position: relative;
+		    overflow: hidden;
+		    width: 100%;
+		    max-width: calc(100% - 120px);
 		}
 	}
 }

@@ -34,25 +34,29 @@ module.exports = function(app) {
                 },
                 {
                     name: 'Art',
-                    image: './images/app/themes/art.png'
+                    image: './images/app/themes/art.png',
+                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
                 },
                 {
                     name: 'Musique',
-                    image: './images/app/themes/musique.png'
+                    image: './images/app/themes/musique.png',
+                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
                 },
                 {
                     name: 'Soirée',
-                    image: './images/app/themes/night.png'
+                    image: './images/app/themes/night.png',
+                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
                 },
                 {
                     name: 'Sport',
-                    image: './images/app/themes/sport.png'
+                    image: './images/app/themes/sport.png',
+                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
                 },
                 {
                     name: 'Divertissement',
-                    image: './images/app/themes/divertissement.png'
+                    image: './images/app/themes/divertissement.png',
+                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
                 }
-                
             ];
 
             return themes;

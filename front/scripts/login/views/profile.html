@@ -1,11 +1,11 @@
 <ion-view view-title="Profile">
     <ion-content view-title="Bonjour {{ user.name }}" class="profile" >
        	<div class="wrap-picture">
-        	<img ng-show="user.photo"  src="data:image/jpg;base64,{{user.photo}}" alt="{{ user.name }}" />
+        	<img ng-show="user.photo"  ng-src="{{user.photo}}" alt="{{ user.name }}" />
         	<img src="./images/app/profile/filtre.png" alt="filtre" class="filtre" />
        		<div class="wrap-links">
-       			<a href="javascript:;" ng-click="takePhoto('upload')"> Télécharger une image </a>
-       			<a href="javascript:;" ng-click="takePhoto()" > Prendre une photo </a>
+       			<a href="javascript:;" ng-click="takePhoto('upload')"><ng-md-icon class="icons" icon="insert_photo" size="20"></ng-md-icon> Télécharger une image </a>
+       			<a href="javascript:;" ng-click="takePhoto()" ><ng-md-icon class="icons" icon="aspect_ratio" size="20"></ng-md-icon> Prendre une photo </a>
        		</div>
        	</div>
        	<div class="wrap-infos">

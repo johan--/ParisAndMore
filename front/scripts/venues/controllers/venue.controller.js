@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', app.name + '.VenuesService', '$stateParams', '$ionicLoading', 'main.common.FirebaseService', '$firebaseObject', '$firebaseArray', '$state'];
+    var deps = ['$scope', app.name + '.VenuesService', '$stateParams', '$ionicLoading', 'main.common.FirebaseService', '$firebaseObject', '$firebaseArray'];
 
-    function controller($scope, VenuesService, $stateParams, $ionicLoading, FirebaseService, $firebaseObject, $firebaseArray, $state) {
+    function controller($scope, VenuesService, $stateParams, $ionicLoading, FirebaseService, $firebaseObject, $firebaseArray) {
         var vm = this;
         var venueId = $stateParams.venueId;
         vm.controllername = fullname;
@@ -18,7 +18,6 @@ module.exports = function(app) {
         vm.checkLike = checkLike;
         vm.getLikers = getLikers;
         vm.likers = [];
-        vm.createRoom = createRoom;
 
         activate();
 
@@ -54,7 +53,7 @@ module.exports = function(app) {
                     console.log('il y a un putain de snapshot');
                 } else {
                     vm.isLiked = false;
-                    console.log("snapshot vaut null");
+                    console.log('snapshot vaut null');
                 }
                 console.log(snapshot.val());
                 console.log(vm.isLiked);
@@ -85,39 +84,23 @@ module.exports = function(app) {
             var users = $firebaseArray(FirebaseService.getFirebaseReference().child('users'));
             users.$loaded(function(result) {
                 angular.forEach(result, function(liker, key) {
-                    if(liker.venues && liker.$id !== FirebaseService.getAuthUid()) {
+                    console.log(liker.$id);
+                    if(liker.venues) {
                         angular.forEach(liker.venues, function(value, key) {
                             if(key === venueId) {
                                 vm.likers.push({
                                     id: liker.$id,
-                                    name: liker.name
+                                    name: liker.name,
+                                    photo: liker.photo,
+                                    age: liker.age,
+                                    description: liker.description
                                 });
+                                console.log(vm.likers);
                             } else {
                             }
                         });
                     }
                 });
-            });
-        }
-
-        function createRoom(liker) {
-            var user = $firebaseObject(FirebaseService.getAuthDatas());
-            var rooms = $firebaseArray(FirebaseService.getFirebaseReference().child('rooms'));
-            var userRooms = $firebaseArray(FirebaseService.getAuthDatas().child('rooms'));
-            var partnerRooms = $firebaseArray(FirebaseService.getUser(liker.id).child('rooms'));
-            rooms.$add({
-                date: new Date().getTime()
-            }).then(function(ref) {
-                userRooms.$add({
-                    id: ref.name(),
-                    partnerName: liker.name
-                });
-                partnerRooms.$add({
-                    id: ref.name(),
-                    partnerName: user.name
-                });
-                $state.go('app.room', { roomId: ref.name()});
-
             });
         }
 
@@ -127,12 +110,13 @@ module.exports = function(app) {
             var jours = [];
             vm.venue.monday = 0;
             vm.venue.currendDay = null;
-            var k = 0, m =0;
+            var k = 0;
+            var m = 0;
 
-            for(var i = 0; i < days.length; i++ ){
-                if(days[i].days.indexOf("lun") > -1)
+            for(var i = 0; i < days.length; i++) {
+                if(days[i].days.indexOf('lun') > -1)
                    vm.venue.monday = i;
-               if(days[i].days.indexOf("Aujourd'hui") > -1)
+               if (days[i].days.indexOf('Aujourd\'hui') > -1)
                    vm.venue.currendDay = i;
             }
 

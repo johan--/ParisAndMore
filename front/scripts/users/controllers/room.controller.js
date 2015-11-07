@@ -5,25 +5,25 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', 'main.users.ChatService', '$stateParams', 'main.common.FirebaseService', '$firebaseArray', 'Firebase'];
+    var deps = ['$scope', 'main.users.ChatService', '$stateParams', 'main.common.FirebaseService', '$firebaseObject', '$firebaseArray', 'Firebase'];
 
-    function controller($scope, ChatService, $stateParams, FirebaseService, $firebaseArray, Firebase) {
+    function controller($scope, ChatService, $stateParams, FirebaseService, $firebaseArray, $firebaseObject, Firebase) {
         var vm = this;
         vm.controllername = fullname;
         vm.getRoom = getRoom;
         vm.addMessage = addMessage;
-        vm.getUserName = getUserName;
+        vm.getUser = getUser;
         console.log(new Date());
         activate();
 
         function activate() {
             vm.getRoom();
-            vm.getUserName();
+            vm.getUser();
         }
 
-        function getUserName() {
+        function getUser() {
             FirebaseService.getAuthDatas().on('value', function(snapshot) {
-                vm.userName = snapshot.val().name;
+                vm.user = snapshot.val();
             });
         }
 
@@ -35,8 +35,10 @@ module.exports = function(app) {
             var timestamp = new Date().getTime();
             vm.messages.$add({
                 date: timestamp,
-                name: vm.userName,
-                message: vm.newMessage
+                name: vm.user.name,
+                message: vm.newMessage,
+                age: vm.user.age,
+                photo: vm.user.photo
             });
             vm.newMessage = '';
         }

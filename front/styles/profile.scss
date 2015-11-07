@@ -16,6 +16,7 @@
 			&.filtre{
 				bottom: 0;
 				z-index: 2;
+				height: 50px;
 			}
 		}
 		.wrap-links{
@@ -25,6 +26,15 @@
 		    left: 20px;
 		    right: 20px;
 		    width: calc(100% - 40px);
+		    .icons{
+		    	fill: #ffffff;
+		    	position: relative;
+		    	width: 20px;
+		    	padding-right: 22px;
+		    	svg{
+		    		position: absolute;
+		    	}
+		    }
 			a{
 				color: #ffffff;
 				&:last-child{
