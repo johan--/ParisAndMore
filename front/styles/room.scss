@@ -15,7 +15,7 @@
 			display: none;
 		}
 		input[type="text"]{
-			width: calc(100% - 60px);
+			width: calc(100% - 40px);
 			display: inline-block;
 			padding-left: 10px
 		}
@@ -41,7 +41,8 @@
 		height: 45px;
 		position: relative;
 		overflow: hidden;
-		border-radius: 10%;
+		/*border-radius: 10%;*/
+		border-radius: 50%;
 		margin-right: 10px;
 		img{
 			position: absolute;
@@ -71,6 +72,7 @@
 			position: absolute;
 			right: 12px;
 			bottom: -27px;
+			color: #C5C5C5;
 			display:none;
 		}
 		&:last-child{

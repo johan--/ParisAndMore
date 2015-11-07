@@ -4,9 +4,7 @@ var controllername = 'likers';
 module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
-
     var deps = [];
-
     function controller() {
         var vm = this;
         vm.controllername = fullname;
@@ -14,7 +12,7 @@ module.exports = function(app) {
 
         var activate = function() {
 
-        };
+        }; 
         activate();
     }
 

@@ -13,6 +13,7 @@ module.exports = function(app) {
         vm.controllername = fullname;
         vm.getVenues = getVenues;
         vm.initMap = initMap;
+        vm.activate = activate; 
         $scope.venue  = '';
         $scope.$on('leafletDirectiveMarker.click', function(e, args) {
             var themeObject = VenuesService.getSelectedTheme();
@@ -31,9 +32,9 @@ module.exports = function(app) {
             $scope.markerVenueId = args.model.venueId;
         });
 
-        activate();
 
         function activate() {
+            //console.log(lat, lng);
             $ionicLoading.show({
                 template: 'loading'
             });
@@ -45,6 +46,8 @@ module.exports = function(app) {
                     .then(function(position) {
                         var lat = position.coords.latitude;
                         var lng = position.coords.longitude;
+                        vm.center.lat = lat;
+                        vm.center.lng = lng;
                         vm.getVenues(lat, lng);
                     }, function(err) {
                         $cordovaToast
@@ -55,6 +58,7 @@ module.exports = function(app) {
                             });
                     });
         }
+        vm.activate();
 
         function getVenues(lat, lng) {
             var categories = VenuesService.getVenuesCats();

@@ -1,7 +1,7 @@
 <ion-view view-title="Conversation" class="room">
     <ion-content>
     <div class="wrap-messages">
-      <md-list-item class="wrap-message active" ng-repeat="message in roomCtrl.messages">
+      <md-list-item class="wrap-message" ng-repeat="message in roomCtrl.messages" ng-class="{{ message.name == message.name ? 'active' : '' }}">
           <div class="wrap-image">
             <img ng-src="{{ message.photo }}" alt="" />
           </div>
