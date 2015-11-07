@@ -1,5 +1,6 @@
 'use strict';
 var controllername = 'aroundVenues';
+var popupTemplate = require('../views/around-popup.html');
 
 module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
@@ -13,6 +14,7 @@ module.exports = function(app) {
 
         vm.getVenues = getVenues;
         vm.initMap = initMap;
+        $scope.venue  = '';
 
         activate();
 
@@ -23,6 +25,14 @@ module.exports = function(app) {
             vm.getVenues();
             vm.initMap();
             $scope.$on('leafletDirectiveMarker.click', function(e, args) {
+                console.log(args);
+                VenuesService.getVenue({
+                    venueId: args.model.venueId
+                }).then(function(result) {
+                    $scope.markerImage = result.response.venue.bestPhoto.suffix;
+                    $scope.markerName = result.response.venue.name;
+                    $scope.markerDescription = result.response.venue.description;
+                });
                 $scope.markerVenueId = args.model.venueId;
             });
         }
@@ -43,7 +53,7 @@ module.exports = function(app) {
                         lat: vm.venues[i].location.lat,
                         lng: vm.venues[i].location.lng,
                         getMessageScope: function() { return $scope; },
-                        message: '<div><h2>' + vm.venues[i].name + '</h2><button ui-sref="app.venue({venueId:markerVenueId})">Voir</button></div>'
+                        message: popupTemplate
                     });
                 }
                 $ionicLoading.hide();
