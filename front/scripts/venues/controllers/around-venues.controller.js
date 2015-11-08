@@ -67,7 +67,6 @@ module.exports = function(app) {
             }).then(function(result) {
                 vm.venues = result.response.venues;
                 var length = vm.venues.length;
-                console.log(vm.venues);
                 $scope.markers = [];
                 for(var i = 0; i < length; i++) {
                     $scope.markers.push({

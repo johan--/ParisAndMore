@@ -6,8 +6,8 @@ var $ = require('jquery');
 module.exports = function(app) {
 
     // controller
-    var controllerDeps = [];
-    var controller = function() {
+    var controllerDeps = ['$scope'];
+    var controller = function($scope) {
         var mapDirectiveCtrl = this;
         mapDirectiveCtrl.directivename = directivename;
     };
@@ -16,56 +16,76 @@ module.exports = function(app) {
     /*eslint-disable consistent-this */
 
     // directive
-    var directiveDeps = ['main.common.MAPBOX'];
-    var directive = function(MAPBOX) {
+    var directiveDeps = ['main.common.MAPBOX', '$cordovaGeolocation', '$stateParams', 'main.venues.VenuesService', '$ionicLoading'];
+    var directive = function(MAPBOX, $cordovaGeolocation, $stateParams, VenuesService, $ionicLoading) {
         return {
             restrict: 'AE',
             scope: {
                 title: '@' // '@' reads attribute value, '=' provides 2-way binding, '&" works with functions
             },
-            controller: controller,
-            controllerAs: 'mapDirectiveCtrl',
+            controller: 'main.venues.venue',
+            controllerAs: 'venueCtrl',
             bindToController: true,
             link: function(scope, element, attrs) {
-                var map = L.map(element[0]).setView([51.505, -0.09], 13);
-
-                $(element).closest('#direction-content').find('.direction-panel').on('click', function() {
-                    $(element).find('.leaflet-routing-container').toggleClass('direction-panel-open');
+                $ionicLoading.show({
+                    template: 'Calcul de l\'itinéraire...'
                 });
+                var posOptions = {timeout: 10000, enableHighAccuracy: false};
+                $cordovaGeolocation
+                .getCurrentPosition(posOptions)
+                    .then(function(position) {
+                        var myLat = position.coords.latitude;
+                        var myLng = position.coords.longitude;
+                        VenuesService.getVenue({
+                            venueId: $stateParams.venueId
+                        }).then(function(result) {
+                            $ionicLoading.hide();
+                            var venue = result.response.venue;
+                            var map = L.map(element[0]).setView([venue.location.lat, venue.location.lng], 13);
 
-                L.tileLayer('http://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                    center: [0, 0],
-                    maxZoom: 18,
-                    id: MAPBOX.MAP_ID,
-                    accessToken: MAPBOX.API_KEY
-                }).addTo(map);
+                            $(element).closest('#direction-content').find('.direction-panel').on('click', function() {
+                                $(element).find('.leaflet-routing-container').toggleClass('direction-panel-open');
+                            });
 
-                L.Icon.Default.imagePath = '../../../icons/app';
-                var marker = L.marker([51.5, -0.09]).addTo(map);
+                            L.tileLayer('http://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                                center: [0, 0],
+                                maxZoom: 18,
+                                id: MAPBOX.MAP_ID,
+                                accessToken: MAPBOX.API_KEY
+                            }).addTo(map);
 
-                L.Routing.control({
-                    waypoints: [
-                        L.latLng(57.74, 11.94),
-                        L.latLng(57.6792, 11.949)
-                    ],
-                    showAlternatives: true,
-                    router: L.Routing.mapbox('pk.eyJ1IjoiZ2VvZmZyZXlwbCIsImEiOiJjaWducG90ZDUwMDNqbHVrdDZtM2xmNGs0In0.KeeItsK30xU8aEOAcFBpGw', {
-                        profile: 'mapbox.walking',
-                        alternatives: true,
-                        steps: false
-                    }),
-                    itineraryFormatter: L.Routing.ItineraryBuilder({
-                        createContainer: function() {
-                            return '<div></div>';
-                        }
-                    }),
-                    routeWhileDragging: false,
-                    language: 'fr',
-                    containerClassName: 'custom-container',
-                    summaryTemplate: '<div class="direction-panel-header"><h2>{name}</h2><h3>{distance}, {time}</h3></div>'
-                }).addTo(map);
+                            L.Icon.Default.imagePath = '../../../icons/app';
 
-
+                            L.Routing.control({
+                                waypoints: [
+                                    L.latLng(venue.location.lat, venue.location.lng),
+                                    L.latLng(myLat, myLng)
+                                ],
+                                showAlternatives: true,
+                                router: L.Routing.mapbox('pk.eyJ1IjoiZ2VvZmZyZXlwbCIsImEiOiJjaWducG90ZDUwMDNqbHVrdDZtM2xmNGs0In0.KeeItsK30xU8aEOAcFBpGw', {
+                                    profile: 'mapbox.walking',
+                                    alternatives: true,
+                                    steps: false
+                                }),
+                                itineraryFormatter: L.Routing.ItineraryBuilder({
+                                    createContainer: function() {
+                                        return '<div></div>';
+                                    }
+                                }),
+                                routeWhileDragging: false,
+                                language: 'fr',
+                                containerClassName: 'custom-container',
+                                summaryTemplate: '<div class="direction-panel-header"><h2>{name}</h2><h3>{distance}, {time}</h3></div>'
+                            }).addTo(map);
+                        });
+                    }, function(err) {
+                        $cordovaToast
+                            .show(err, 'short', 'center')
+                            .then(function(success) {
+                                $state.go('app.home');
+                            }, function(error) {
+                            });
+                    });
             }
         };
     };
