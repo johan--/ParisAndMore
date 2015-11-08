@@ -6,6 +6,7 @@ if (window.location.toString().indexOf('localhost:5555') > 0) {
     window.name = 'NG_DEFER_BOOTSTRAP!NG_ENABLE_DEBUG_INFO!';
 }
 var angular = require('angular');
+var $ = require('jquery');
 require('angular-ui-router');
 require('angular-animate');
 require('angular-sanitize');
@@ -13,6 +14,8 @@ require('angular-moment');
 require('moment/locale/fr');
 require('angular-material-icons');
 require('leaflet');
+require('leaflet-routing-machine');
+require('lrm-mapbox');
 require('angular-leaflet-directive');
 require('firebase');
 require('angularfire');

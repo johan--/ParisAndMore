@@ -103,7 +103,7 @@ module.exports = function(app) {
                 });
             });
         }
-        
+
         function createRoom(liker) {
             var user = $firebaseObject(FirebaseService.getAuthDatas());
             var rooms = $firebaseArray(FirebaseService.getFirebaseReference().child('rooms'));

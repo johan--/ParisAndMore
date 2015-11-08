@@ -13,7 +13,7 @@ module.exports = function(app) {
         vm.controllername = fullname;
         vm.getVenues = getVenues;
         vm.initMap = initMap;
-        vm.activate = activate; 
+        vm.activate = activate;
         $scope.venue  = '';
         $scope.$on('leafletDirectiveMarker.click', function(e, args) {
             var themeObject = VenuesService.getSelectedTheme();
@@ -68,9 +68,9 @@ module.exports = function(app) {
                 vm.venues = result.response.venues;
                 var length = vm.venues.length;
                 console.log(vm.venues);
-                vm.markers = [];
+                $scope.markers = [];
                 for(var i = 0; i < length; i++) {
-                    vm.markers.push({
+                    $scope.markers.push({
                         venueId: vm.venues[i].id,
                         lat: vm.venues[i].location.lat,
                         lng: vm.venues[i].location.lng,

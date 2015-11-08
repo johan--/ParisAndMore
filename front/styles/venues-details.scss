@@ -1,104 +1,140 @@
 .venues-details{
-	.wrap{
-		padding: 0 10px;
-		h1{
-			font-size: 26px;
-			text-transform: uppercase;
-			text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-			margin: 10px 0;
-			display: inline-block;
-			max-width: 300px;
-		}
-		h3{
-			padding: 10px 0 7px 0;
-			margin:0;
-		}
-		.rating{
-			width: 100%;
-			background: url('../images/app/venues-details/rates.png') no-repeat;
-			margin-bottom: 10px;
-			li{
-				display: inline-block;
-				svg{
-					fill: $main-color;
-				}
+    .wrap{
+        padding: 0 10px;
+        h1{
+            font-size: 26px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+            margin: 10px 0;
+            display: inline-block;
+            max-width: 300px;
+        }
+        h3{
+            padding: 10px 0 7px 0;
+            margin:0;
+        }
+        .rating{
+            width: 100%;
+            background: url('../images/app/venues-details/rates.png') no-repeat;
+            margin-bottom: 10px;
+            li{
+                display: inline-block;
+                svg{
+                    fill: $main-color;
+                }
 
-			}
-		}
+            }
+        }
 
-		md-list-item.md-3-line, md-list-item.md-3-line > .md-no-style{
-			padding: 10px 0;
-		}
-	}
-	.wrap-header{
-		width: 100%;
-	    height: 0;
-	    padding-bottom: 50%;
-	    img{
-			width: 100%;
-	    }
-	}
-	.ion-ios-heart, .ion-ios-heart-outline{
-		font-size:40px; 
-		color: #EC0000; 
-		cursor:pointer; 
-		position:relative; 
-		display: inline-block;
-		bottom: 0;
-		&:before{
-			line-height: 36px;
-			font-size: 27px;
-			padding: 0 11px;
-		}
+        md-list-item.md-3-line, md-list-item.md-3-line > .md-no-style{
+            padding: 10px 0;
+        }
+    }
+    .wrap-header{
+        width: 100%;
+        height: 0;
+        padding-bottom: 50%;
+        img{
+            width: 100%;
+        }
+    }
+    .ion-ios-heart, .ion-ios-heart-outline{
+        font-size:40px;
+        color: #EC0000;
+        cursor:pointer;
+        position:relative;
+        display: inline-block;
+        bottom: 0;
+        &:before{
+            line-height: 36px;
+            font-size: 27px;
+            padding: 0 11px;
+        }
 
-	}
-	.horaires{
-		width: 100%;
-		margin: 20px 0;
-		tr{
-			&:first-child{
-				background: #3c3c3c;
-				color: #ffffff;
-			}
-		}
-		td{
-			border: 1px solid #3c3c3c;
-			padding: 9px 30px;
-		}
-	}
+    }
+    .horaires{
+        width: 100%;
+        margin: 20px 0;
+        tr{
+            &:first-child{
+                background: #3c3c3c;
+                color: #ffffff;
+            }
+        }
+        td{
+            border: 1px solid #3c3c3c;
+            padding: 9px 30px;
+        }
+    }
 
-	.wrap-users{
-		h3{
-			padding: 10px;
-		}
-		.wrap-list{
-			width: calc(100% - 6px);
-			margin: 10px 0;
-		}
-		.wrap-image{
-			width: 55px;
-			height: 55px;
-			border-radius: 10%;
-			overflow: hidden;
-			margin-right: 20px;
-			position: relative;
-			display: inline-table;
-			img{
-				width: 100%;
-				position: absolute;
-			}
-		}
-		.wrap-text{
-			width: calc(100% - 10px);
-			a{
-				float: right;
-			    padding: 3px 11px;
-			    background: #005eb5;
-			    color: #ffffff;
-			}
-		}
-		.wrap-desc{
-			color: #7D7D7D;
-		}
-	}
+    .wrap-users{
+        h3{
+            padding: 10px;
+        }
+        .wrap-list{
+            width: calc(100% - 6px);
+            margin: 10px 0;
+        }
+        .wrap-image{
+            width: 55px;
+            height: 55px;
+            border-radius: 10%;
+            overflow: hidden;
+            margin-right: 20px;
+            position: relative;
+            display: inline-table;
+            img{
+                width: 100%;
+                position: absolute;
+            }
+        }
+        .wrap-text{
+            width: calc(100% - 10px);
+            a{
+                float: right;
+                padding: 3px 11px;
+                background: #005eb5;
+                color: #ffffff;
+            }
+        }
+        .wrap-desc{
+            color: #7D7D7D;
+        }
+    }
+}
+
+.direction-panel-header{
+    h2{
+        font-size: 20px;
+    }
+    h3{
+        font-size: 15px;
+    }
+}
+
+.leaflet-routing-container.leaflet-bar.custom-container.leaflet-control{
+    position: absolute;
+    width: 200px;
+    right: -250px;
+    transition: all .2s;
+    color:#fff;
+    background-color: #F44336;
+    padding: 10px;
+    height:500px;
+    overflow:scroll;
+}
+.leaflet-routing-container.leaflet-bar.custom-container.leaflet-control.direction-panel-open{
+    right: -10px;
+}
+
+.direction-panel{
+    position: absolute;
+    bottom: 100px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #F44336;
+    border:none;
 }
