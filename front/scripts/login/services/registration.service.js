@@ -3,9 +3,9 @@ var servicename = 'RegistrationService';
 
 module.exports = function(app) {
 
-    var dependencies = ['$rootScope', 'Firebase', '$firebaseArray', 'main.common.firebaseConst', '$firebaseAuth', '$state', '$ionicLoading', '$cordovaToast'];
+    var dependencies = ['$rootScope', 'Firebase', '$firebaseArray', 'main.common.firebaseConst', '$firebaseAuth', '$state', '$ionicLoading', '$cordovaToast', '$ionicHistory'];
 
-    function service($rootScope, Firebase, $firebaseArray, firebaseConst, $firebaseAuth, $state, $ionicLoading, $cordovaToast) {
+    function service($rootScope, Firebase, $firebaseArray, firebaseConst, $firebaseAuth, $state, $ionicLoading, $cordovaToast, $ionicHistory) {
         var ref = new Firebase(firebaseConst.FBURL);
         $rootScope.authObj = $firebaseAuth(ref);
 
@@ -37,6 +37,9 @@ module.exports = function(app) {
                         var users = ref.child('users/' + fbAuth.uid);
                         users.set(user);
                         $ionicLoading.hide();
+                        $ionicHistory.nextViewOptions({
+                            disableBack: true
+                        });
                         $rootScope.isConnected = true;
                         $state.go('app.profile');
                     });
