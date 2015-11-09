@@ -13,7 +13,7 @@ module.exports = function(app) {
         vm.controllername = fullname;
         vm.getVenues = getVenues;
         vm.initMap = initMap;
-        vm.activate = activate; 
+        vm.activate = activate;
         $scope.venue  = '';
         $scope.$on('leafletDirectiveMarker.click', function(e, args) {
             var themeObject = VenuesService.getSelectedTheme();
@@ -44,8 +44,9 @@ module.exports = function(app) {
             $cordovaGeolocation
                 .getCurrentPosition(posOptions)
                     .then(function(position) {
-                        vm.center.lat = position.coords.latitude;
+                        /*vm.center.lat = position.coords.latitude;
                         vm.center.lng = position.coords.longitude;
+                        vm.getVenues(vm.center.lat, vm.center.lng);*/
                         vm.getVenues(vm.center.lat, vm.center.lng);
                     }, function(err) {
                         $cordovaToast
@@ -67,10 +68,9 @@ module.exports = function(app) {
             }).then(function(result) {
                 vm.venues = result.response.venues;
                 var length = vm.venues.length;
-                console.log(vm.venues);
-                vm.markers = [];
+                $scope.markers = [];
                 for(var i = 0; i < length; i++) {
-                    vm.markers.push({
+                    $scope.markers.push({
                         venueId: vm.venues[i].id,
                         lat: vm.venues[i].location.lat,
                         lng: vm.venues[i].location.lng,

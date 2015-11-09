@@ -54,19 +54,14 @@ module.exports = function(app) {
             FirebaseService.getAuthDatas().child('venues').child(venueId).once('value', function(snapshot) {
                 if(snapshot.val()) {
                     vm.isLiked = true;
-                    console.log('il y a un putain de snapshot');
                 } else {
                     vm.isLiked = false;
-                    console.log('snapshot vaut null');
                 }
-                console.log(snapshot.val());
-                console.log(vm.isLiked);
             });
         }
 
         function like(venue) {
             var userReference = FirebaseService.getAuthDatas();
-            console.log(userReference);
             var userLikes = userReference.child('venues/' + venue.id);
             FirebaseService.getAuthDatas().child('venues').child(venue.id).once('value', function(snapshot) {
                 if(snapshot.val()) {
@@ -78,9 +73,6 @@ module.exports = function(app) {
                         name: venue.name
                     });
                 }
-
-                console.log('je clique et c est:');
-                console.log(vm.isLiked);
             });
         }
 
@@ -88,7 +80,6 @@ module.exports = function(app) {
             var users = $firebaseArray(FirebaseService.getFirebaseReference().child('users'));
             users.$loaded(function(result) {
                 angular.forEach(result, function(liker, key) {
-                    console.log(liker.$id);
                     if(liker.venues) {
                         angular.forEach(liker.venues, function(value, key) {
                             if(key === venueId) {
@@ -98,12 +89,32 @@ module.exports = function(app) {
                                     photo: liker.photo,
                                     age: liker.age
                                 });
-                                console.log(vm.likers);
                             } else {
                             }
                         });
                     }
                 });
+            });
+        }
+
+        function createRoom(liker) {
+            var user = $firebaseObject(FirebaseService.getAuthDatas());
+            var rooms = $firebaseArray(FirebaseService.getFirebaseReference().child('rooms'));
+            var userRooms = $firebaseArray(FirebaseService.getAuthDatas().child('rooms'));
+            var partnerRooms = $firebaseArray(FirebaseService.getUser(liker.id).child('rooms'));
+            rooms.$add({
+                date: new Date().getTime()
+            }).then(function(ref) {
+                userRooms.$add({
+                    id: ref.name(),
+                    partnerName: liker.name
+                });
+                partnerRooms.$add({
+                    id: ref.name(),
+                    partnerName: user.name
+                });
+                $state.go('app.room', { roomId: ref.name()});
+
             });
         }
 
@@ -165,7 +176,7 @@ module.exports = function(app) {
         }
 
         function initMap(location) {
-            vm.center = {
+            $scope.center = {
                 lat: location.lat,
                 lng: location.lng,
                 zoom: 16
