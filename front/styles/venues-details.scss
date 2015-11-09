@@ -128,3 +128,41 @@
     display: none;
 }
 
+.direction-panel-header{
+    h2{
+        font-size: 20px;
+    }
+    h3{
+        font-size: 15px;
+    }
+}
+
+.leaflet-routing-container.leaflet-bar.custom-container.leaflet-control{
+    position: absolute;
+    width: 200px;
+    right: -250px;
+    transition: all .2s;
+    color:#fff;
+    background-color: #0c60ee;
+    padding: 10px;
+    height:500px;
+    overflow-y:scroll;
+    border:none;
+}
+.leaflet-routing-container.leaflet-bar.custom-container.leaflet-control.direction-panel-open{
+    right: -10px;
+}
+
+.direction-panel{
+    position: absolute;
+    bottom: 70px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #0c60ee;
+    border:none;
+}
+
+

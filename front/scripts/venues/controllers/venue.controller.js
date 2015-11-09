@@ -97,27 +97,6 @@ module.exports = function(app) {
             });
         }
 
-        /*function createRoom(liker) {
-            var user = $firebaseObject(FirebaseService.getAuthDatas());
-            var rooms = $firebaseArray(FirebaseService.getFirebaseReference().child('rooms'));
-            var userRooms = $firebaseArray(FirebaseService.getAuthDatas().child('rooms'));
-            var partnerRooms = $firebaseArray(FirebaseService.getUser(liker.id).child('rooms'));
-            rooms.$add({
-                date: new Date().getTime()
-            }).then(function(ref) {
-                userRooms.$add({
-                    id: ref.name(),
-                    partnerName: liker.name
-                });
-                partnerRooms.$add({
-                    id: ref.name(),
-                    partnerName: user.name
-                });
-                $state.go('app.room', { roomId: ref.name()});
-
-            });
-        }*/
-
         function getDays(days) {
             vm.venue.days = [];
 
