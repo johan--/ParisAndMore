@@ -3,7 +3,7 @@
     <div class="wrap-messages">
       <md-list-item class="wrap-message" ng-repeat="message in roomCtrl.messages">
         <div ng-show ="message.name != roomCtrl.user.name ">
-          <div class="wrap-image" ng-click="#/app/">
+          <div class="wrap-image">
             <img ng-src="{{ message.photo }}" alt="" />
           </div>
           <div class="wrap-text" layout="column">
@@ -35,9 +35,9 @@
       <input ng-model="roomCtrl.newMessage" type="text" placeholder="Saisissez votre message" />
       <label id="bottom">
         <input type="submit" />
-        <ng-md-icon icon="send" class="btn-send" size="25"></ng-md-icon> 
+        <ng-md-icon icon="send" class="btn-send" size="25"></ng-md-icon>
       </label>
-       
+
       </button>
     </form>
     </ion-content>

@@ -97,7 +97,7 @@ module.exports = function(app) {
             });
         }
 
-        function createRoom(liker) {
+        /*function createRoom(liker) {
             var user = $firebaseObject(FirebaseService.getAuthDatas());
             var rooms = $firebaseArray(FirebaseService.getFirebaseReference().child('rooms'));
             var userRooms = $firebaseArray(FirebaseService.getAuthDatas().child('rooms'));
@@ -116,7 +116,7 @@ module.exports = function(app) {
                 $state.go('app.room', { roomId: ref.name()});
 
             });
-        }
+        }*/
 
         function getDays(days) {
             vm.venue.days = [];

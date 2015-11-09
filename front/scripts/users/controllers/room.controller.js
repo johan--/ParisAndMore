@@ -13,7 +13,6 @@ module.exports = function(app) {
         vm.getRoom = getRoom;
         vm.addMessage = addMessage;
         vm.getUser = getUser;
-        vm.scrollMe = scrollMe;
         activate();
 
         function activate() {
@@ -28,7 +27,6 @@ module.exports = function(app) {
             FirebaseService.getAuthDatas().on('value', function(snapshot) {
                 vm.user = snapshot.val();
                 $ionicLoading.hide();
-                scrollMe('bottom');
             });
         }
 
@@ -48,7 +46,6 @@ module.exports = function(app) {
                 photo: vm.user.photo
             });
             vm.newMessage = '';
-            $('#bottom').scroll();
             setTimeout(function() {
                 $('.wrap-message:last-child').addClass('active');
                 $('.wrap-message').last().animate({
