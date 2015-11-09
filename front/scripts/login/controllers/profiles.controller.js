@@ -25,25 +25,38 @@ module.exports = function(app) {
         activate();
 
         function createRoom(liker) {
-            console.log(liker.$id);
+            var isExist = false;
             var user = $firebaseObject(FirebaseService.getAuthDatas());
             var rooms = $firebaseArray(FirebaseService.getFirebaseReference().child('rooms'));
             var userRooms = $firebaseArray(FirebaseService.getAuthDatas().child('rooms'));
             var partnerRooms = $firebaseArray(FirebaseService.getUser(liker.$id).child('rooms'));
-            rooms.$add({
-                date: new Date().getTime()
-            }).then(function(ref) {
-                userRooms.$add({
-                    id: ref.name(),
-                    partnerName: liker.name
+            userRooms.$loaded().then(function() {
+                angular.forEach(userRooms, function(value, key) {
+                    if(value.partnerId === liker.$id) {
+                        isExist = true;
+                        $state.go('app.room', { roomId: value.id });
+                        return;
+                    }
                 });
-                partnerRooms.$add({
-                    id: ref.name(),
-                    partnerName: user.name
-                });
-                $state.go('app.room', { roomId: ref.name()});
-
+                if(isExist === false) {
+                    rooms.$add({
+                        date: new Date().getTime()
+                    }).then(function(ref) {
+                        userRooms.$add({
+                            id: ref.name(),
+                            partnerName: liker.name,
+                            partnerId: liker.$id
+                        });
+                        partnerRooms.$add({
+                            id: ref.name(),
+                            partnerName: user.name,
+                            partnerId: user.$id
+                        });
+                        $state.go('app.room', { roomId: ref.name()});
+                    });
+                }
             });
+
         }
     }
 
