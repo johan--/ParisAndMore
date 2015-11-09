@@ -3,7 +3,8 @@
     <div class="wrap-messages">
       <md-list-item class="wrap-message" ng-repeat="message in roomCtrl.messages">
         <div ng-show ="message.name != roomCtrl.user.name ">
-          <div class="wrap-image">
+
+          <div class="wrap-image" >
             <img ng-src="{{ message.photo }}" alt="" />
           </div>
           <div class="wrap-text" layout="column">
