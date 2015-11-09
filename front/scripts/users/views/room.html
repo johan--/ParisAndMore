@@ -1,22 +1,39 @@
 <ion-view view-title="Conversation" class="room">
     <ion-content>
     <div class="wrap-messages">
-      <md-list-item class="wrap-message" ng-repeat="message in roomCtrl.messages" ng-class="{{ message.name == message.name ? 'active' : '' }}">
-          <div class="wrap-image">
+      <md-list-item class="wrap-message" ng-repeat="message in roomCtrl.messages">
+        <div ng-show ="message.name != roomCtrl.user.name ">
+          <div class="wrap-image" >
             <img ng-src="{{ message.photo }}" alt="" />
           </div>
           <div class="wrap-text" layout="column">
             <!--<h3>{{ message.name }}, {{ message.age }} ans</h3>-->
-            <p>{{ message.message }}</p>
+            <p>
+              {{ message.message }}
+            </p>
             <span class="time-ago" am-time-ago="{{ message.date }}"></span>
             <!-- <span>{{message.date | amDateFormat:'MM.DD.YYYY HH:mm:ss'}}</span> -->
           </div>
+        </div>
+        <div ng-show ="message.name == roomCtrl.user.name " class="me">
+          <div class="wrap-image me"  ng-show ="message.name == roomCtrl.user.name ">
+            <img ng-src="{{ message.photo }}" alt="" />
+          </div>
+          <div class="wrap-text" layout="column">
+            <!--<h3>{{ message.name }}, {{ message.age }} ans</h3>-->
+            <p>
+              {{ message.message }}
+            </p>
+            <span class="time-ago" am-time-ago="{{ message.date }}"></span>
+            <!-- <span>{{message.date | amDateFormat:'MM.DD.YYYY HH:mm:ss'}}</span> -->
+          </div>
+        </div>
         </md-list-item>
     </div>
     </md-list>
     <form ng-submit="roomCtrl.addMessage()">
       <input ng-model="roomCtrl.newMessage" type="text" placeholder="Saisissez votre message" />
-      <label>
+      <label id="bottom">
         <input type="submit" />
         <ng-md-icon icon="send" class="btn-send" size="25"></ng-md-icon> 
       </label>

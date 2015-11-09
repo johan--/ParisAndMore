@@ -1,17 +1,22 @@
 .themes{
 	.item-complex, a.item.item-complex, button.item.item-complex{
-		height: 200px;
+		width: 100%;
+		height: 0;
+		padding-bottom: 50%;
 		border: 0;
 	}
 	.content-theme{
 		
 		a{
 			position: relative;
-			height: 200px;
+			width: 100%;
+			height: 0;
+			padding-bottom: 50%;
 			img{
 				position: absolute;
 				top: 0;
 				left: 0;
+				width: 100%;
 			}
 			span{
 				color: #ffffff;

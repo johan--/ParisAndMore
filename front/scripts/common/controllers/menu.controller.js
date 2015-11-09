@@ -21,6 +21,9 @@ module.exports = function(app) {
                 scope: $scope,
             });
 
+            $('body').delegate('.popover-backdrop', 'click', function() {
+                $scope.popover.hide();
+            });
         }
 
         $scope.logOut = function() {

@@ -1,6 +1,6 @@
 <div style="width:200px">
-    <img style="width:200px" ng-src="{{ markerImage }}">
+    <img style="width:201px" ng-src="{{ markerImage }}">
     <h4>{{ markerName }}</h4>
     <p>{{ markerDescription }}</p>
-    <button ui-sref="app.venue({venueId:markerVenueId})">Voir</button>
+    <a ui-sref="app.venue({venueId:markerVenueId})" class="btn-link" >En savoir plus</a>
 </div>

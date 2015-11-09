@@ -9,34 +9,40 @@
                     
                     <div class="wrap">
                         <h1>{{ venueCtrl.venue.name }}</h1>
-                        <span ng-class="venueCtrl.isLiked ? 'ion-ios-heart' : 'ion-ios-heart-outline'" ng-click="venueCtrl.like(venueCtrl.venue)"></span>
+                        
 
                         <ul class="rating">
                             <li ng-repeat="note in venueCtrl.venue.ratingTab track by $index">
                                 <ng-md-icon icon="grade"  size="20"></ng-md-icon>
                             </li>
                         </ul>
+                        
+                        <span ng-class="venueCtrl.isLiked ? 'ion-ios-heart' : 'ion-ios-heart-outline'" ng-click="venueCtrl.like(venueCtrl.venue)"> {{venueCtrl.isLiked ? 'Vous êtes inscrit !' : 'Je veux y aller'}}  </span>
+                        <div class="clear"></div>
 
-                        <p>{{ venueCtrl.venue.description }}</p>
+                        <p class="wrap-desc">{{ venueCtrl.venue.description }}</p>
 
                         <h3>Contacts</h3>
-                        <p>
+                        <p ng-show="venueCtrl.venue.location.address">
                             Adresse :
-                            {{ venueCtrl.venue.location.address }}, {{ venueCtrl.venue.location.postalCode }} {{ venueCtrl.venue.location.city }} </p>
-                        <p>
+                            {{ venueCtrl.venue.location.address }}, {{ venueCtrl.venue.location.postalCode }} {{ venueCtrl.venue.location.city }} 
+                        </p>
+                        <p ng-show="venueCtrl.venue.contact.formattedPhone">
                             Téléphone :
                             {{ venueCtrl.venue.contact.formattedPhone }}
                         </p>
-                        <a ng-if="venueCtrl.venue.url" href="{{ venueCtrl.venue.url}}" target="_blank"> Voir le site web</a>
+                        <p>
+                            <a ng-show="venueCtrl.venue.url" href="{{ venueCtrl.venue.url}}" target="_blank"> Voir le site web</a>
+                        </p>
+                        <div ng-show="venueCtrl.venue.popular.timeframes">
+                             <h3>Ouvertures</h3>
+                            <table class="horaires">
+                                <tr>
+                                    <td>Jour</td>
+                                    <td>Horaires</td>
+                                </tr>
 
-                        <h3>Ouvertures</h3>
-                        <table class="horaires">
-                            <tr>
-                                <td>Jour</td>
-                                <td>Horaires</td>
-                            </tr>
-
-                            <tr ng-repeat="day in venueCtrl.venue.jour">
+                                <tr ng-repeat="day in venueCtrl.venue.jour">
 
                                    <td ng-if="day.days == 'Aujourd\'hui'">
                                         <b>{{day.days}}</b>
@@ -51,16 +57,17 @@
                                     <td ng-if="day.days != 'Aujourd\'hui'">
                                         {{day.horaire}}
                                     </td>
-                            </tr>
-                        </table>
+                                </tr>
+                            </table>
+                        </div>   
                     </div>
                 </ion-content>
             </ion-view>
         </ion-tab>
         <ion-tab title="About" icon-on="ion-ios-location" icon-off="ion-ios-location-outline">
             <ion-view>
-                <ion-content>
-                    <leaflet center="venueCtrl.center" layers="venueCtrl.layers" markers="venueCtrl.markers" width="100%" height="500px"></leaflet>
+                <ion-content class="wrap-map">
+                    <leaflet center="venueCtrl.center" layers="venueCtrl.layers" markers="venueCtrl.markers" style="position: initial; height:100%; width:100%;"></leaflet>
                 </ion-content>
             </ion-view>
         </ion-tab>
@@ -68,21 +75,20 @@
             <ion-view>
                 <ion-content>
                     <div class="wrap-users">
-                        <h3>Ils aiment ce lieu</h3> 
-                        <md-list-item ng-repeat="liker in venueCtrl.likers" class="wrap-list" >
-                            <div class="wrap-image">
-                                <a ng-href="./profile/{{liker.id}}" >
-                                    <img ng-src="{{liker.photo}}" alt="{{liker.name}}" />
-                                </a>
-                            </div>
-                            <div  layout="column" class="wrap-text">
-                              <span>{{ liker.name }}, {{ liker.age}} {{ liker.age ? 'ans' : ''}} 
-                                <a ng-href="./profile/{{liker.id}}" >
-                                      Voir son profil
-                                  </a>
-                                </span> 
-                              <!--<p class="wrap-desc">"<span>{{ liker.description }}</span>"</p>-->
-                            </div>
+                        <h3>Ils veulent y aller</h3> 
+                        <md-list-item ng-repeat="liker in venueCtrl.likers" class="wrap-list"  >
+                                <div class="wrap-image">
+                                    <a ng-href="#/app/profile/user={{liker.id}}" >
+                                        <img ng-src="{{liker.photo}}" alt="{{liker.name}}" />
+                                    </a>
+                                </div>
+                                <div  layout="column" class="wrap-text">
+                                  <span>{{ liker.name }}, {{ liker.age}} {{ liker.age ? 'ans' : ''}} 
+                                        <a ng-href="#/app/profile/user={{liker.id}}" >
+                                            Voir son profil
+                                        </a>
+                                    </span> 
+                                </div>
                         </md-list-item>
                     </div>
                 </ion-content>

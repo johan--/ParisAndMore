@@ -1,1 +1,32 @@
-<h1>Profile visité</h1>
+<ion-view view-title="{{profilesCtrl.user.name}}" cache-view="false" class="profiles">
+    <ion-view>
+        <ion-content>
+			<div class="wrap-picture">
+	        	<img ng-show="profilesCtrl.user.photo"  ng-src="{{profilesCtrl.user.photo}}" alt="{{ profilesCtrl.user.name }}" />
+	        	<img src="./images/app/profile/filtre.png" alt="filtre" class="filtre" />
+	       	</div>
+
+	       	<div class="wrap-infos">
+		        <h1>{{profilesCtrl.user.name}}</h1>, {{profilesCtrl.user.age}} ans
+            	<a href="javascript:;" class="btn-link" ng-click="profilesCtrl.createRoom(profilesCtrl.user)">Contactez-moi</a>
+		        
+            	<p>
+					Parle  {{profilesCtrl.user.langue}}
+            	</p>
+
+		        <p>
+		        	Actuellement {{profilesCtrl.user.emploie}}
+		        </p>
+
+		        <p>
+		        	<b>Status : </b> {{profilesCtrl.user.status}}
+		        </p>
+
+				<b>Description : </b>
+				<p>
+					{{profilesCtrl.user.description}}
+				</p>
+	       	</div>
+        </ion-content>
+    </ion-view>
+</ion-view>

@@ -11,3 +11,14 @@ a{
 .pane, .view {
     /*padding-top: 44px;*/
 }
+
+.btn-link{
+	padding: 4px 9px;
+	background: $main-color;
+	color: #ffffff !important;
+}
+
+.clear{
+	clear: both;
+	width:100%;
+}

@@ -36,7 +36,7 @@ module.exports = function(app) {
         function activate() {
             //console.log(lat, lng);
             $ionicLoading.show({
-                template: 'loading'
+                template: 'Chargement'
             });
 
             vm.initMap();

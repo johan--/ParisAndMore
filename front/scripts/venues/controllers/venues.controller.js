@@ -18,7 +18,7 @@ module.exports = function(app) {
 
         function activate() {
             $ionicLoading.show({
-                template: 'loading'
+                template: 'Chargement'
             });
             vm.getVenues();
         }
