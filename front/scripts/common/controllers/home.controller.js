@@ -5,15 +5,12 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$rootScope', '$scope', 'main.login.RegistrationService', '$ionicModal', '$state', '$ionicHistory'];
+    var deps = ['$rootScope', '$scope', 'main.login.RegistrationService', '$state', '$ionicHistory'];
 
-    function controller($rootScope, $scope, RegistrationService, $ionicModal, $state, $ionicHistory) {
+    function controller($rootScope, $scope, RegistrationService, $state, $ionicHistory) {
         console.log($rootScope);
         var vm = this;
         vm.controllername = fullname;
-        vm.modal = $ionicModal.fromTemplate(require('../../login/views/login.html'), {scope: $scope});
-        vm.openModal = openModal;
-        $scope.closeLogin = closeLogin;
         $scope.doLogin = doLogin;
 
         activate();
@@ -25,17 +22,8 @@ module.exports = function(app) {
             });
         }
 
-        function openModal() {
-            vm.modal.show();
-        }
-
-        function closeLogin() {
-            vm.modal.hide();
-        }
-
         function doLogin(user) {
             RegistrationService.login(user).then(function() {
-                vm.modal.hide();
                 $rootScope.isConnected = true;
                 $state.go('app.profile');
             }, function(error) {
