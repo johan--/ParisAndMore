@@ -80,7 +80,7 @@ module.exports = function(app) {
             var users = $firebaseArray(FirebaseService.getFirebaseReference().child('users'));
             users.$loaded(function(result) {
                 angular.forEach(result, function(liker, key) {
-                    if(liker.venues) {
+                    if(liker.venues && liker.$id !== FirebaseService.getAuthUid()) {
                         angular.forEach(liker.venues, function(value, key) {
                             if(key === venueId) {
                                 vm.likers.push({
