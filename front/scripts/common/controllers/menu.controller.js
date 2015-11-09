@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$rootScope', '$scope', '$ionicPopover', 'main.login.RegistrationService', 'main.common.firebaseConst'];
+    var deps = ['$rootScope', '$scope', '$ionicPopover', 'main.login.RegistrationService', 'main.common.firebaseConst', '$ionicHistory'];
 
-    function controller($rootScope, $scope, $ionicPopover, RegistrationService, firebaseConst) {
+    function controller($rootScope, $scope, $ionicPopover, RegistrationService, firebaseConst, $ionicHistory) {
         var vm = this;
         vm.controllername = fullname;
 
@@ -29,6 +29,9 @@ module.exports = function(app) {
         $scope.logOut = function() {
             console.log('logout');
             $rootScope.isAuth = false;
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
             RegistrationService.logOut();
         };
 

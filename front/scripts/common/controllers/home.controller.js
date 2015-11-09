@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$rootScope', '$scope', 'main.login.RegistrationService', '$ionicModal', '$state'];
+    var deps = ['$rootScope', '$scope', 'main.login.RegistrationService', '$ionicModal', '$state', '$ionicHistory'];
 
-    function controller($rootScope, $scope, RegistrationService, $ionicModal, $state) {
+    function controller($rootScope, $scope, RegistrationService, $ionicModal, $state, $ionicHistory) {
         console.log($rootScope);
         var vm = this;
         vm.controllername = fullname;
@@ -19,7 +19,10 @@ module.exports = function(app) {
         activate();
 
         function activate() {
-
+            $ionicHistory.clearHistory();
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
         }
 
         function openModal() {
