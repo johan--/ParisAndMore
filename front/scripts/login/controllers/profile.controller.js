@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', '$rootScope', 'main.login.RegistrationService', '$state', '$cordovaCamera', '$firebaseObject', 'main.common.FirebaseService'];
+    var deps = ['$scope', '$rootScope', 'main.login.RegistrationService', '$state', '$cordovaCamera', '$firebaseObject', 'main.common.FirebaseService', '$ionicPlatform'];
 
-    function controller($scope, $rootScope, RegistrationService, $state, $cordovaCamera, $firebaseObject, FirebaseService) {
+    function controller($scope, $rootScope, RegistrationService, $state, $cordovaCamera, $firebaseObject, FirebaseService, $ionicPlatform) {
         var vm = this;
         vm.controllername = fullname;
         var fb = RegistrationService.getFirebaseReference();
@@ -28,14 +28,18 @@ module.exports = function(app) {
 
         var takingPhoto = false;
         $scope.takePhoto = function(typeSource) {
-            document.addEventListener('deviceready', onDeviceReady, false);
-            function onDeviceReady() {
+            console.log('take photo ?');
+           $ionicPlatform.ready(function() {
                 if(takingPhoto) {
+                    console.log('test');
                     takingPhoto = false;
                     return;
                 }else {
+                    console.log('no taking photo');
                     takingPhoto = true;
                 }
+
+                console.log('ready');
 
                 if(typeSource == 'upload') {
                     var options = {
@@ -61,14 +65,17 @@ module.exports = function(app) {
                 }
 
                 $cordovaCamera.getPicture(options).then(function(imageData) {
+                    console.log('ok');
                     var user = FirebaseService.getAuthDatas();
                     user.update({
                         'photo': 'data:image/jpg;base64,' + imageData
                     });
                 }, function(err) {
+                    console.log(err);
                     //alert('L\'opération semble être annulée');
                 });
-            }
+            });
+
         };
 
         function addInfo() {
