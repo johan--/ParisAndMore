@@ -40,9 +40,9 @@
 	    }
 	}
 	.ion-ios-heart, .ion-ios-heart-outline{
-		color: #EC0000; 
-		cursor:pointer; 
-		position:relative; 
+		color: #EC0000;
+		cursor:pointer;
+		position:relative;
 		float: right;
 		vertical-align: middle;
     	padding-right: 45px;
@@ -114,7 +114,7 @@
 			    color: #ffffff;
 			}
 		}
-		
+
 	}
 
 	.wrap-map{
@@ -122,5 +122,9 @@
 			height: 100%;
 		}
 	}
+}
+
+.leaflet-control-layers{
+    display: none;
 }
 

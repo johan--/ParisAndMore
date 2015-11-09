@@ -16,14 +16,14 @@ module.exports = function(app) {
         activate();
 
         function activate() {
-            $ionicHistory.clearHistory();
-            $ionicHistory.nextViewOptions({
-                disableBack: true
-            });
+
         }
 
         function doLogin(user) {
             RegistrationService.login(user).then(function() {
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
                 $rootScope.isConnected = true;
                 $state.go('app.profile');
             }, function(error) {
