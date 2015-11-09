@@ -34,32 +34,37 @@ module.exports = function(app) {
                     // Related to foursquare categories id
                     // https://developer.foursquare.com/categorytree
                     // Art Gallery, Historic Site, Art Museum, History Museum
-                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
+                    categories: '4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
                 },
                 {
                     name: 'Art',
                     image: './images/app/themes/art.png',
-                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
+                    // Art Gallery, Public Art
+                    categories: '4bf58dd8d48988d18f941735,507c8c4091d498d9fc8c67a9'
                 },
                 {
                     name: 'Musique',
                     image: './images/app/themes/musique.png',
-                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
+                    // Concert Hall, Music Venue
+                    categories: '5032792091d4c4b30a586d5c,4bf58dd8d48988d1e5931735'
                 },
                 {
                     name: 'Soirée',
                     image: './images/app/themes/night.png',
-                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
+                    // Nightlife Spot
+                    categories: '4d4b7105d754a06376d81259'
                 },
                 {
                     name: 'Sport',
                     image: './images/app/themes/sport.png',
-                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
+                    // Athletics & Sports
+                    categories: '4f4528bc4b90abdf24c9de85'
                 },
                 {
                     name: 'Divertissement',
                     image: './images/app/themes/divertissement.png',
-                    categories: '4bf58dd8d48988d18f941735,4deefb944765f83613cdba6e,4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735'
+                    // Movie Theater
+                    categories: '4bf58dd8d48988d17f941735'
                 }
             ];
 
