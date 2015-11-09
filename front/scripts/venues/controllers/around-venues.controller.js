@@ -23,7 +23,6 @@ module.exports = function(app) {
                 if(result.response.venue.bestPhoto) {
                     $scope.markerImage = 'https://irs0.4sqi.net/img/general/200x100' + result.response.venue.bestPhoto.suffix;
                 } else {
-                    console.log(themeObject);
                     $scope.markerImage = themeObject.theme.image;
                 }
                 $scope.markerName = result.response.venue.name;
@@ -32,9 +31,7 @@ module.exports = function(app) {
             $scope.markerVenueId = args.model.venueId;
         });
 
-
         function activate() {
-            //console.log(lat, lng);
             $ionicLoading.show({
                 template: 'Chargement'
             });
@@ -44,9 +41,9 @@ module.exports = function(app) {
             $cordovaGeolocation
                 .getCurrentPosition(posOptions)
                     .then(function(position) {
-                        /*vm.center.lat = position.coords.latitude;
+                        console.log(position);
+                        vm.center.lat = position.coords.latitude;
                         vm.center.lng = position.coords.longitude;
-                        vm.getVenues(vm.center.lat, vm.center.lng);*/
                         vm.getVenues(vm.center.lat, vm.center.lng);
                     }, function(err) {
                         $cordovaToast
@@ -68,9 +65,9 @@ module.exports = function(app) {
             }).then(function(result) {
                 vm.venues = result.response.venues;
                 var length = vm.venues.length;
-                $scope.markers = [];
+                vm.markers = [];
                 for(var i = 0; i < length; i++) {
-                    $scope.markers.push({
+                    vm.markers.push({
                         venueId: vm.venues[i].id,
                         lat: vm.venues[i].location.lat,
                         lng: vm.venues[i].location.lng,
