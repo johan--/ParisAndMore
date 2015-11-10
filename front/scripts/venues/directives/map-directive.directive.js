@@ -54,7 +54,7 @@ module.exports = function(app) {
                                 accessToken: MAPBOX.API_KEY
                             }).addTo(map);
 
-                            L.Icon.Default.imagePath = '../../../icons/app';
+                            L.Icon.Default.imagePath = './icons/app';
 
                             L.Routing.control({
                                 waypoints: [

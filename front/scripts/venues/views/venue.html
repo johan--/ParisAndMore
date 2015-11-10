@@ -9,14 +9,14 @@
 
                     <div class="wrap">
                         <h1>{{ venueCtrl.venue.name }}</h1>
-                        
+
 
                         <ul class="rating">
                             <li ng-repeat="note in venueCtrl.venue.ratingTab track by $index">
                                 <ng-md-icon icon="grade"  size="20"></ng-md-icon>
                             </li>
                         </ul>
-                        
+
                         <span ng-class="venueCtrl.isLiked ? 'ion-ios-heart' : 'ion-ios-heart-outline'" ng-click="venueCtrl.like(venueCtrl.venue)"> {{venueCtrl.isLiked ? 'Vous êtes inscrit !' : 'Je veux y aller'}}  </span>
                         <div class="clear"></div>
 
@@ -25,7 +25,7 @@
                         <h3>Contacts</h3>
                         <p ng-show="venueCtrl.venue.location.address">
                             Adresse :
-                            {{ venueCtrl.venue.location.address }}, {{ venueCtrl.venue.location.postalCode }} {{ venueCtrl.venue.location.city }} 
+                            {{ venueCtrl.venue.location.address }}, {{ venueCtrl.venue.location.postalCode }} {{ venueCtrl.venue.location.city }}
                         </p>
                         <p ng-show="venueCtrl.venue.contact.formattedPhone">
                             Téléphone :
@@ -59,7 +59,7 @@
                                     </td>
                                 </tr>
                             </table>
-                        </div>   
+                        </div>
                     </div>
                 </ion-content>
             </ion-view>
@@ -75,7 +75,7 @@
             <ion-view>
                 <ion-content id="direction-content">
                     <div map-directive id="map" style="width:100%; height:600px"></div>
-                    <button class="ion-arrow-left-a direction-panel"></button>
+                    <button class="ion-navigate direction-panel"></button>
                 </ion-content>
             </ion-view>
         </ion-tab>
@@ -83,7 +83,7 @@
             <ion-view>
                 <ion-content>
                     <div class="wrap-users">
-                        <h3>Ils veulent y aller</h3> 
+                        <h3>Ils veulent y aller</h3>
                         <md-list-item ng-repeat="liker in venueCtrl.likers" class="wrap-list"  >
                                 <div class="wrap-image">
                                     <a ng-href="#/app/profile/user={{liker.id}}" >
@@ -91,11 +91,11 @@
                                     </a>
                                 </div>
                                 <div  layout="column" class="wrap-text">
-                                  <span>{{ liker.name }}, {{ liker.age}} {{ liker.age ? 'ans' : ''}} 
+                                  <span>{{ liker.name }}, {{ liker.age}} {{ liker.age ? 'ans' : ''}}
                                         <a ng-href="#/app/profile/user={{liker.id}}" >
                                             Voir son profil
                                         </a>
-                                    </span> 
+                                    </span>
                                 </div>
                         </md-list-item>
                     </div>
