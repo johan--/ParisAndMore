@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.hybridframework.parisAndMore" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:rim="http://www.blackberry.com/ns/widgets">
-  <name>parisAndMore</name>
-  <description>parisAndMore</description>
+  <name>ParisAndMore</name>
+  <description>ParisAndMore</description>
   <author email="parisAndMore@hybridframework" href="http://hybridframework.com/">
-      parisAndMore Team
+      ParisAndMore Team
     </author>
   <content src="index.html"/>
   <access origin="*"/>

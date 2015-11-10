@@ -131,9 +131,11 @@
 .direction-panel-header{
     h2{
         font-size: 20px;
+        color:#fff;
     }
     h3{
         font-size: 15px;
+        color:#fff;
     }
 }
 
@@ -166,6 +168,11 @@
     font-size: 30px;
     padding-top: 5px;
     padding-right: 10px;
+}
+
+.direction-panel-header{
+    color:#fff;
+    margin-bottom: 20px;
 }
 
 

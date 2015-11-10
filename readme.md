@@ -1,6 +1,12 @@
 # Paris and More
 
-## Installation
+## APK
+
+Pour récupérer l'APK
+
+http://mostafa-karim.fr/ParisAndMore/app.apk
+
+## Dev
 
 * Clone the project and create a folder
 ```
