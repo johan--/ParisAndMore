@@ -168,8 +168,8 @@ module.exports = function(app) {
                         url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
                         type: 'xyz',
                         layerOptions: {
-                            apikey: 'pk.eyJ1IjoiZ2VvZmZyZXlwbCIsImEiOiJjaWducG90ZDUwMDNqbHVrdDZtM2xmNGs0In0.KeeItsK30xU8aEOAcFBpGw',
-                            mapid: 'geoffreypl.o3do1117'
+                            apikey: '', // Replace with your API key
+                            mapid: '' // Replace with your map id
                         }
                     }
                 }

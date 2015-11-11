@@ -3,7 +3,7 @@ var constantname = 'firebaseConst';
 
 module.exports = function(app) {
     var args = {
-        FBURL: 'https://pwm.firebaseio.com/'
+        FBURL: '' // Replace with your Firebase root url
     };
     app.constant(app.name + '.' + constantname, args);
 };

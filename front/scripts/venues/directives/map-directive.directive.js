@@ -62,7 +62,7 @@ module.exports = function(app) {
                                     L.latLng(myLat, myLng)
                                 ],
                                 showAlternatives: true,
-                                router: L.Routing.mapbox('pk.eyJ1IjoiZ2VvZmZyZXlwbCIsImEiOiJjaWducG90ZDUwMDNqbHVrdDZtM2xmNGs0In0.KeeItsK30xU8aEOAcFBpGw', {
+                                router: L.Routing.mapbox('', { // Replace with you API key
                                     profile: 'mapbox.walking',
                                     alternatives: true,
                                     steps: false
