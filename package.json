@@ -111,7 +111,7 @@
     "karma-webpack": "1.7.0",
     "less": "2.5.1",
     "less-loader": "2.2.1",
-    "lodash": "3.10.1",
+    "lodash": "4.17.21",
     "map-stream": "0.0.6",
     "mkdirp": "0.5.1",
     "mocha": "2.3.3",
